@@ -499,19 +499,50 @@ body::-webkit-scrollbar {
     border-radius: 12px;
     padding: 2rem 2.5rem;
     margin-top: -9rem;
+    position: relative;
+    /* Needed for pseudo-element positioning */
     /* Increased negative margin to pull box up further */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow:
         0 4px 30px rgba(0, 0, 0, 0.5),
         inset 0 0 60px rgba(139, 69, 19, 0);
+    transition: border-color 0.5s ease-in-out;
+    /* removing background transition from here */
+    overflow: hidden;
+    /* Ensure radius is respected by ::after */
+}
+
+/* Pseudo-element for smooth background fade */
+.hero-description-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero-description-box:hover {
+    /* Background change handled by ::after opacity */
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.hero-description-box:hover::after {
+    opacity: 1;
 }
 
 .hero-description-text {
+    position: relative;
+    z-index: 1;
+    /* Ensure text is above the overlay */
     font-family: 'Rajdhani', sans-serif;
     font-size: 1.1rem;
     line-height: 1.7;
     color: #f6d7d7;
+
     text-align: center;
     margin: 0;
     letter-spacing: 0.05em;
@@ -530,9 +561,14 @@ body::-webkit-scrollbar {
     border-radius: 12px;
     padding: 1.5rem 2rem;
     margin-top: 1rem;
+    position: relative;
+    /* For pseudo-element */
+    overflow: hidden;
+    /* Respect radius */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 0 60px rgba(139, 69, 19, 0);
+    transition: border-color 0.5s ease-in-out;
 
     display: flex;
     flex-direction: column;
@@ -541,7 +577,29 @@ body::-webkit-scrollbar {
     color: #f6d7d7;
 }
 
+/* Pseudo-element for hover overlay */
+.hero-info-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero-info-box:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.hero-info-box:hover::after {
+    opacity: 1;
+}
+
 .hero-info-month {
+    position: relative;
+    z-index: 1;
     font-family: 'Rajdhani', sans-serif;
     font-size: 2rem;
     /* Big size */
@@ -551,6 +609,8 @@ body::-webkit-scrollbar {
 }
 
 .hero-info-day {
+    position: relative;
+    z-index: 1;
     font-family: 'Rajdhani', sans-serif;
     font-size: 1rem;
     /* Small size */
@@ -560,6 +620,8 @@ body::-webkit-scrollbar {
 }
 
 .hero-info-divider {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: 1px;
     background-color: rgba(246, 215, 215, 0.3);
@@ -567,6 +629,8 @@ body::-webkit-scrollbar {
 }
 
 .hero-info-category {
+    position: relative;
+    z-index: 1;
     font-family: 'Rajdhani', sans-serif;
     font-size: 0.8rem;
     /* Smaller than other */
@@ -797,6 +861,56 @@ body::-webkit-scrollbar {
 .tilt-btn:hover {
     border-color: #ffb908;
     background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Timer Background Image */
+.timer-bg-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer-bg-image {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    max-width: none;
+    height: 155%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.8;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 80%, transparent 100%);
+}
+
+/* Content Background Image (Extra Img 02) */
+.content-bg-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content-bg-image {
+    position: absolute;
+    top: 73%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    max-width: none;
+    height: 80%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.8;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
 }
 
 .btn-indicator {
