@@ -1,0 +1,26 @@
+# React JSX files (primary language)
+*.jsx linguist-language=JSX
+*.js linguist-language=JavaScript
+
+# Mark as detectable
+*.jsx linguist-detectable=true
+*.js linguist-detectable=true
+
+# Exclude backend from language statistics (separate Node.js backend)
+backend/** linguist-vendored
+
+# Exclude config files from language statistics
+eslint.config.js linguist-vendored
+postcss.config.js linguist-vendored
+tailwind.config.js linguist-vendored
+vite.config.js linguist-vendored
+
+# Exclude build artifacts and dependencies
+dist/** linguist-generated
+node_modules/** linguist-vendored
+
+# Documentation files
+*.md linguist-documentation
+*.json linguist-data
+LICENSE linguist-documentation
+README.md linguist-documentation

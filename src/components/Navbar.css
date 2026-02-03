@@ -1,0 +1,362 @@
+/* ===== Navbar Container ===== */
+.navbar {
+    position: fixed;
+    top: -15px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+/* Navbar blur on scroll */
+.navbar.floating-nav {
+    background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    height: 250px;
+    align-items: flex-start;
+}
+
+
+.nav-icon-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-icon {
+    width: 150px;
+    /* Desktop/Window view size */
+    height: 150px;
+    object-fit: contain;
+    stroke: #ffd700;
+    /* For SVGs */
+    transition: all 0.3s ease;
+}
+
+/* Active State - Popup + Glow */
+.navbar-links a.active .nav-icon {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 8px #ffd700);
+}
+
+/* Desktop Hover State */
+@media (hover: hover) {
+    .navbar-links a:hover .nav-icon {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 8px #ffd700);
+    }
+}
+
+/* Nav Label visible on desktop */
+/* Nav Label hidden globally as per user request */
+.nav-label {
+    display: none;
+}
+
+/* ===== Banner Background ===== */
+.navbar-banner {
+    position: relative;
+    width: 95%;
+    max-width: 1000px;
+    min-height: 380px;
+    background-image: url('../assets/navbar/navbar-main.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 0;
+}
+
+/* ===== Navigation Links ===== */
+.navbar-links {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+    margin: 0;
+    padding: 0 60px;
+}
+
+.navbar-links li {
+    position: relative;
+}
+
+/* Event (2nd) - Desktop offset */
+.navbar-links li:nth-child(2) a {
+    transform: translateY(15px);
+}
+
+.navbar-links li:nth-child(1) a {
+    transform: translateY(10px);
+}
+
+.navbar-links li:nth-child(3) a {
+    transform: translateY(10px);
+}
+
+.navbar-links a {
+    display: flex;
+    /* Enable flex for alignment */
+    align-items: center;
+    /* Center icon and text vertically */
+    gap: 0.5rem;
+    /* Space between icon and text */
+    color: #ffd700;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-shadow:
+        1px 1px 2px rgba(0, 0, 0, 0.8),
+        0 0 10px rgba(255, 215, 0, 0.3);
+    transition: all 0.3s ease;
+    padding: 0.5rem 0.75rem;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+
+
+.navbar-links a:hover::after,
+.navbar-links a.active::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+/* ===== Torches (Global) ===== */
+.torch-container {
+    position: absolute;
+    width: 90px;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.torch-left {
+    left: -5px;
+    top: -20px;
+}
+
+.torch-right {
+    right: -5px;
+    top: -20px;
+    transform: scaleX(-1);
+    /* Mirror the right torch so it looks symmetrical */
+}
+
+.torch-body {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    position: relative;
+}
+
+.torch-flame {
+    position: absolute;
+    top: -50px;
+    left: 55%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 220px;
+    z-index: 0;
+    opacity: 0.9;
+    filter: blur(2px);
+}
+
+/* ===== Responsive - Tablet ===== */
+@media (max-width: 1024px) {
+    .navbar-banner {
+        width: 98%;
+        padding: 12px 0;
+    }
+
+    .navbar-links {
+        gap: 1.5rem;
+        padding: 0 40px;
+    }
+
+    .navbar-links a {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.5rem;
+    }
+}
+
+/* ===== Responsive - Mobile ===== */
+@media (max-width: 768px) {
+    .navbar {
+        top: auto;
+        bottom: 0;
+        /* User requested same BG (wood banner), so removing the solid black backing */
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-top: none;
+        pointer-events: none;
+        /* Let clicks pass through empty areas if any */
+        min-width: 350px;
+        /* Prevent collapsing on very small screens */
+    }
+
+    /* Wrap contents in a container that catches clicks if needed, 
+       but links already do. */
+    .navbar-banner {
+        pointer-events: auto;
+        /* Re-enable pointer events for the banner */
+        width: 100%;
+        min-height: 90px;
+        /* Separated/Reduced for mobile view (fits 98px icons) */
+        /* Increased to allow image to show better */
+        padding: 5px 0;
+        background-image: url('../assets/navbar/navbar-main.png');
+        background-size: 100% 280%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: transparent;
+    }
+
+    .navbar-links {
+        gap: 0;
+        padding: 0 10px;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .navbar-links li {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+
+    .navbar-links a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.6rem;
+        /* Small text below icon */
+        letter-spacing: 0.05em;
+        padding: 0.3rem 0;
+        gap: 4px;
+        width: 100%;
+    }
+
+    /* Fine-tune icon positions per user request */
+    /* Home (1st) */
+    .navbar-links li:nth-child(1) a {
+        transform: translateY(-3px);
+    }
+
+
+    /* Event (2nd) */
+    .navbar-links li:nth-child(2) a {
+        transform: translateY(15px);
+    }
+
+    .navbar-links li:nth-child(3) a {
+        transform: translateY(4px);
+    }
+
+    /* Profile (3rd) - default */
+
+    .nav-icon-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .nav-icon {
+        width: 118px;
+        /* Mobile view size */
+        height: 118px;
+        stroke: #ffd700;
+        /* Gold (for SVG) */
+        object-fit: contain;
+        /* For images */
+    }
+
+    /* Adjust hover/active states for mobile */
+
+
+    /* Hide underline effect on mobile */
+    .navbar-links a::after {
+        display: none;
+    }
+
+    /* Torches: User wanted to keep them. 
+       Position them at bottom corners above the bar? */
+    .torch-container {
+        pointer-events: none;
+        transform: scale(0.9);
+        /* Smaller torches */
+        bottom: 0;
+        /* Anchor to bottom */
+    }
+
+    .torch-left {
+        left: -25px;
+        top: auto;
+        bottom: 20px;
+        /* Moved up from 10px */
+    }
+
+    .torch-right {
+        right: -25px;
+        top: auto;
+        bottom: 20px;
+        /* Moved up from 10px */
+    }
+
+    .torch-right .torch-flame {
+        left: 50%;
+        /* Move fire 3-5px to left (55% -> 50% of 90px ~= 4.5px) */
+    }
+}
+
+/* ===== Responsive - Small Mobile ===== */
+@media (max-width: 480px) {
+    .navbar-banner {
+        min-height: 45px;
+        padding: 8px 0;
+    }
+
+    .navbar-links {
+        gap: 0.3rem;
+        padding: 0 15px;
+    }
+
+    .navbar-links a {
+        font-size: 0.6rem;
+        letter-spacing: 0;
+        padding: 0.2rem 0.3rem;
+    }
+}
+
+/* ===== Navbar Logo ===== */
+.navbar-logo {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: auto;
+    z-index: 20;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+}
+
+/* Adjust for mobile */
+@media (max-width: 768px) {
+    .navbar-logo {
+        width: 130px;
+        top: -30px;
+    }
+}

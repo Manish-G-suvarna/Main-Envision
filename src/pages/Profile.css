@@ -1,0 +1,263 @@
+.profile-root {
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Rajdhani', sans-serif;
+    color: white;
+    background: #0a0a0f;
+    /* Fallback */
+    overflow-x: hidden;
+}
+
+/* Split Layout Container */
+.profile-split-container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Left Panel - Form */
+.profile-left-panel {
+    flex: 1;
+    padding: 4rem 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a0b0b 0%, #0f0505 100%);
+    position: relative;
+    z-index: 2;
+}
+
+/* Right Panel - Visuals */
+.profile-right-panel {
+    flex: 1;
+    background: radial-gradient(circle at center, #3d1414 0%, #000000 70%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glow Effect on Right Panel */
+.profile-right-panel::before {
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 60, 0, 0.15), transparent 60%);
+    animation: pulseGlow 8s infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+.profile-logo-img {
+    width: 300px;
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(255, 100, 50, 0.5));
+    margin-bottom: 2rem;
+    z-index: 10;
+    transition: transform 0.5s ease;
+}
+
+.profile-logo-img:hover {
+    transform: scale(1.05) rotate(2deg);
+}
+
+.brand-text {
+    font-family: 'Times New Roman', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #e6dac6;
+    letter-spacing: 2px;
+    z-index: 10;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* Form Styles */
+.form-header {
+    margin-bottom: 3rem;
+}
+
+.form-title {
+    font-size: 2.5rem;
+    background: linear-gradient(90deg, #ff9d00, #ff4d00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.form-subtitle {
+    color: #aaa;
+    font-size: 1.1rem;
+}
+
+.profile-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: span 2;
+}
+
+.form-label {
+    margin-bottom: 0.5rem;
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.form-input,
+.form-select {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 1rem;
+    color: white;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.form-input::placeholder {
+    color: #666;
+}
+
+.form-input:focus,
+.form-select:focus {
+    outline: none;
+    border-color: #ff4d00;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 10px rgba(255, 77, 0, 0.2);
+}
+
+.form-select option {
+    background: #1a0b0b;
+    color: white;
+}
+
+.submit-btn-red {
+    grid-column: span 2;
+    background: #d62828;
+    /* Red base */
+    color: white;
+    border: none;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.submit-btn-red:hover {
+    background: #ff0000;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Nav back button specific for this page */
+.back-home-absolute {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    z-index: 50;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #aaa;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    backdrop-filter: blur(5px);
+}
+
+.back-home-absolute:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+
+/* Existing Profile View Styles (Re-used for the 'Completed' state) */
+.profile-view-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Re-include necessary parts from old CSS if needed or just use profile-view-wrapper context */
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .profile-split-container {
+        flex-direction: column-reverse;
+        /* Visuals on top (or bottom depending on pref), let's keep form accessible */
+    }
+
+    .profile-left-panel {
+        padding: 3rem 2rem;
+    }
+
+    .profile-right-panel {
+        min-height: 300px;
+        padding: 2rem;
+    }
+
+    .profile-logo-img {
+        width: 200px;
+    }
+
+    .brand-text {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .profile-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full-width {
+        grid-column: span 1;
+    }
+
+    .submit-btn-red {
+        grid-column: span 1;
+    }
+}
