@@ -11,9 +11,9 @@ export default function Footer() {
                     <div className="footer-col footer-left">
                         <h2 className="footer-title">Join the ENVISION Vibe!</h2>
                         <div className="footer-address">
-                            <p>Srinivas Engineering College</p>
-                            <p></p>
-                            <p>DK District, Karnataka, India - 574219</p>
+                            <p>Srinivas Institute of Technology</p>
+                            <p>Valachil, Mangaluru</p>
+                            <p>Karnataka, India - 574143</p>
                         </div>
                     </div>
 
@@ -36,7 +36,6 @@ export default function Footer() {
                         <div className="center-links">
                             <a href="#">Team</a>
                             <a href="#">Events</a>
-                            <a href="#">Hackathon</a>
                         </div>
                     </div>
 
@@ -56,7 +55,7 @@ export default function Footer() {
 
                         <div className="contact-item">
                             <svg viewBox="0 0 24 24" className="contact-icon"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>
-                            <a href="mailto:aakriti@canaraengineering.in"></a>
+                            <a href="mailto:demo@gmail.com"></a>
                         </div>
                     </div>
                 </div>
@@ -64,7 +63,6 @@ export default function Footer() {
                 <div className="footer-bottom">
                     <div className="footer-bottom-links">
                         <a href="#">PRIVACY POLICY</a>
-                        <a href="#">CANCELLATION AND REFUNDS</a>
                         <a href="#">TERMS & CONDITIONS</a>
                         <a href="#">CONTACT</a>
                     </div>

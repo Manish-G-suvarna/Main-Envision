@@ -303,14 +303,14 @@
     }
 
     .torch-left {
-        left: -25px;
+        left: -255px;
         top: auto;
         bottom: 20px;
         /* Moved up from 10px */
     }
 
     .torch-right {
-        right: -25px;
+        right: -255px;
         top: auto;
         bottom: 20px;
         /* Moved up from 10px */
