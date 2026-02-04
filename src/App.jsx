@@ -93,6 +93,16 @@ export default function App() {
           <img src={heroTitleImg} alt="ENVISION" className="hero-title-img" />
 
           <div className="hero-details">
+            <img src={timmerBanner} alt="28th January 2026" className="timmer-banner" />
+            <CountdownTimer targetDate="2026-01-28T00:00:00" />
+
+            <img src={startingLogo} alt="Srinivas Institute of Technology" className="hero-institute-logo" />
+
+            {/* Envision Description Box */}
+            <div className="hero-description-box">
+              <p className="hero-description-text">
+                ENVISION is a one-day national-level techno-cultural fest that brings together students, innovators, and creators for an intense celebration of skill, creativity, and competition. Blending cutting-edge technology with vibrant cultural expression, ENVISION features a curated line up of technical challenges, cultural events, and interactive experiences designed to push boundaries and spark inspiration. From problem-solving and innovation to performance and play, the fest captures the spirit of modern youth in a single, high-energy day. Join us at Srinivas Institute of Technology, Valachil Mangaluru-574143 and experience a festival where tradition meets technology and ideas come alive.
+              </p>
             <div className="timer-bg-container">
               <img
                 src={extraImg01}

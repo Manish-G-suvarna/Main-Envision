@@ -313,7 +313,7 @@ body::-webkit-scrollbar {
 .register-login-btn.navbar-btn {
     position: absolute;
     top: 30%;
-    right: -250px;
+    right: -220px;
     transform: translateY(-50%);
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
@@ -326,7 +326,7 @@ body::-webkit-scrollbar {
         0 0 15px rgba(255, 215, 0, 0.6),
         0 0 30px rgba(255, 215, 0, 0.4),
         0 0 45px rgba(255, 215, 0, 0.2);
-    transform: scale(1.02);
+    transform: translateY(-50%) scale(1.02);
 }
 
 @keyframes btnPulse {
