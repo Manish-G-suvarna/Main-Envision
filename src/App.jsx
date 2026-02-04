@@ -41,12 +41,12 @@ export default function App() {
   return (
     <div
       className="app"
-      onContextMenu={(e) => e.preventDefault()} // Disable right-click
+      // onContextMenu={(e) => e.preventDefault()} // Disable right-click
     >
       {/* Background Container */}
       <div className="background-container">
         {/* Top: Video Background */}
-        <div className="bg-video-section">
+        <div className="bg-video-section bg-video">
           {!videoError ? (
             <video
               autoPlay

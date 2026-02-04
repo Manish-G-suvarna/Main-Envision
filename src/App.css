@@ -102,6 +102,11 @@
     flex-shrink: 0;
 }
 
+.bg-video {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 80%, transparent 100%);
+}
+
 .bg-image-section {
     position: relative;
     width: 100%;
