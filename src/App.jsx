@@ -41,7 +41,7 @@ export default function App() {
   return (
     <div
       className="app"
-      // onContextMenu={(e) => e.preventDefault()} // Disable right-click
+    // onContextMenu={(e) => e.preventDefault()} // Disable right-click
     >
       {/* Background Container */}
       <div className="background-container">
@@ -92,132 +92,132 @@ export default function App() {
         <section id="home" className="section hero-section">
           <img src={heroTitleImg} alt="ENVISION" className="hero-title-img" />
 
-          
-            <div className="timer-bg-container">
-              <img
-                src={extraImg01}
-                alt=""
-                className="timer-bg-image"
-              />
-              <img src={timmerBanner} alt="28th January 2026" className="timmer-banner" />
-              <CountdownTimer targetDate="2026-01-28T00:00:00" />
-            </div>
 
-            <div className="content-bg-container">
-              <img
-                src={extraImg02}
-                alt=""
-                className="content-bg-image"
-              />
-              <img src={startingLogo} alt="Srinivas Institute of Technology" className="hero-institute-logo" />
+          <div className="timer-bg-container">
+            <img
+              src={extraImg01}
+              alt=""
+              className="timer-bg-image"
+            />
+            <img src={timmerBanner} alt="28th January 2026" className="timmer-banner" />
+            <CountdownTimer targetDate="2026-01-28T00:00:00" />
+          </div>
 
-              {/* Envision Description Box */}
-              <div className="hero-description-box">
-                <p className="hero-description-text">
-                  ENVISION is a one-day national-level techno-cultural fest that brings together students, innovators, and creators for an intense celebration of skill, creativity, and competition. Blending cutting-edge technology with vibrant cultural expression, ENVISION features a curated lineup of technical challenges, cultural events, and interactive experiences designed to push boundaries and spark inspiration. From problem-solving and innovation to performance and play, the fest captures the spirit of modern youth in a single, high-energy day. Join us at Srinivas Institute of Technology, Valachil, and experience a festival where tradition meets technology and ideas come alive.
-                </p>
-              </div>
+          <div className="content-bg-container">
+            <img
+              src={extraImg02}
+              alt=""
+              className="content-bg-image"
+            />
+            <img src={startingLogo} alt="Srinivas Institute of Technology" className="hero-institute-logo" />
 
-              {/* Date & Event Info Box */}
-              <div className="hero-info-box">
-                <div className="hero-info-month">FABRUARY</div>
-                <div className="hero-info-day">DAY 1</div>
-                <div className="hero-info-divider"></div>
-                <div className="hero-info-category">Events</div>
-              </div>
-
-              {/* Statistics Row */}
-              <div className="hero-stats">
-                <div className="stat-item">
-                  <div className="stat-number">01</div>
-                  <div className="stat-label">DAY OF FUN</div>
-                </div>
-                <div className="stat-item">
-                  <div className="stat-number">20+</div>
-                  <div className="stat-label">EXCITING EVENTS</div>
-                </div>
-                <div className="stat-item">
-                  <div className="stat-number">1,00,000</div>
-                  <div className="stat-label">TOTAL PRIZE</div>
-                </div>
-                <div className="stat-item">
-                  <div className="stat-number">1000+</div>
-                  <div className="stat-label">PARTICIPANTS</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Events Intro Section */}
-            <div className="events-intro">
-              <h2 className="events-intro-title">EVENTS YOU CANT MISS</h2>
-              <div className="events-intro-divider"></div>
-              <p className="events-intro-subtitle">
-                One day. Infinite impact. Step into the experience.
+            {/* Envision Description Box */}
+            <div className="hero-description-box">
+              <p className="hero-description-text">
+                ENVISION is a one-day national-level techno-cultural fest that brings together students, innovators, and creators for an intense celebration of skill, creativity, and competition. Blending cutting-edge technology with vibrant cultural expression, ENVISION features a curated lineup of technical challenges, cultural events, and interactive experiences designed to push boundaries and spark inspiration. From problem-solving and innovation to performance and play, the fest captures the spirit of modern youth in a single, high-energy day. Join us at Srinivas Institute of Technology, Valachil, and experience a festival where tradition meets technology and ideas come alive.
               </p>
             </div>
 
-            {/* Bento Grid Layout */}
-            <div className="bento-grid-container">
-              {/* Row 1: All Events (Wide) */}
-              <BentoTilt className="bento-card-wide">
+            {/* Date & Event Info Box */}
+            <div className="hero-info-box">
+              <div className="hero-info-month">FABRUARY</div>
+              <div className="hero-info-day">DAY 1</div>
+              <div className="hero-info-divider"></div>
+              <div className="hero-info-category">Events</div>
+            </div>
+
+            {/* Statistics Row */}
+            <div className="hero-stats">
+              <div className="stat-item">
+                <div className="stat-number">01</div>
+                <div className="stat-label">DAY OF FUN</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-number">20+</div>
+                <div className="stat-label">EXCITING EVENTS</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-number">1,00,000</div>
+                <div className="stat-label">TOTAL PRIZE</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-number">1000+</div>
+                <div className="stat-label">PARTICIPANTS</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Events Intro Section */}
+          <div className="events-intro">
+            <h2 className="events-intro-title">EVENTS YOU CANT MISS</h2>
+            <div className="events-intro-divider"></div>
+            <p className="events-intro-subtitle">
+              One day. Infinite impact. Step into the experience.
+            </p>
+          </div>
+
+          {/* Bento Grid Layout */}
+          <div className="bento-grid-container">
+            {/* Row 1: All Events (Wide) */}
+            <BentoTilt className="bento-card-wide">
+              <BentoCard
+                src={allEventsBg}
+                title="ALL EVENTS"
+                description="Explore every challenge and celebration."
+              />
+            </BentoTilt>
+
+            {/* Row 2: Mega Events (Left) & Stack (Right) */}
+            <div className="bento-grid-row-2">
+              {/* Mega Events - Tall */}
+              <BentoTilt className="bento-card-tall">
                 <BentoCard
-                  src={allEventsBg}
-                  title="ALL EVENTS"
-                  description="Explore every challenge and celebration."
+                  src={mainBg}
+                  title="MEGA EVENTS"
+                  description="The biggest showdowns."
                 />
               </BentoTilt>
 
-              {/* Row 2: Mega Events (Left) & Stack (Right) */}
-              <div className="bento-grid-row-2">
-                {/* Mega Events - Tall */}
-                <BentoTilt className="bento-card-tall">
+              {/* Right Stack */}
+              <div className="bento-stack-right">
+                <BentoTilt className="bento-card-standard">
                   <BentoCard
                     src={mainBg}
-                    title="MEGA EVENTS"
-                    description="The biggest showdowns."
+                    title="TECHNICAL"
+                    description="Innovate, build, and conquer."
                   />
                 </BentoTilt>
 
-                {/* Right Stack */}
-                <div className="bento-stack-right">
-                  <BentoTilt className="bento-card-standard">
-                    <BentoCard
-                      src={mainBg}
-                      title="TECHNICAL"
-                      description="Innovate, build, and conquer."
-                    />
-                  </BentoTilt>
-
-                  <BentoTilt className="bento-card-standard">
-                    <BentoCard
-                      src={nonTechBg}
-                      title="NON TECHNICAL"
-                      description="Creativity beyond code."
-                    />
-                  </BentoTilt>
-                </div>
+                <BentoTilt className="bento-card-standard">
+                  <BentoCard
+                    src={nonTechBg}
+                    title="NON TECHNICAL"
+                    description="Creativity beyond code."
+                  />
+                </BentoTilt>
               </div>
             </div>
+          </div>
 
-            {/* Sponsors Section */}
-            <div className="section sponsors-section">
-              <h2 className="section-title">OUR SPONSORS</h2>
-              <div className="marquee-wrapper">
-                <div className="marquee-content">
-                  {[...Array(10)].map((_, i) => (
-                    <div key={`sponsor-${i}`} className="sponsor-card">
-                      <div className="sponsor-content">SPONSOR {i + 1}</div>
-                    </div>
-                  ))}
-                  {/* Duplicate for seamless loop */}
-                  {[...Array(10)].map((_, i) => (
-                    <div key={`sponsor-dup-${i}`} className="sponsor-card">
-                      <div className="sponsor-content">SPONSOR {i + 1}</div>
-                    </div>
-                  ))}
-                </div>
+          {/* Sponsors Section */}
+          <div className="section sponsors-section">
+            <h2 className="section-title">OUR SPONSORS</h2>
+            <div className="marquee-wrapper">
+              <div className="marquee-content">
+                {[...Array(10)].map((_, i) => (
+                  <div key={`sponsor-${i}`} className="sponsor-card">
+                    <div className="sponsor-content">SPONSOR {i + 1}</div>
+                  </div>
+                ))}
+                {/* Duplicate for seamless loop */}
+                {[...Array(10)].map((_, i) => (
+                  <div key={`sponsor-dup-${i}`} className="sponsor-card">
+                    <div className="sponsor-content">SPONSOR {i + 1}</div>
+                  </div>
+                ))}
               </div>
             </div>
+          </div>
 
           {/* Scroll Indicator */}
           <div className={`scroll-indicator-container ${showScrollIndicator ? 'visible' : 'hidden'}`}>
