@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, memo } from 'react'
 
 const LEAF_COUNT = 200
 const COLORS = ['#e60000', '#ff3333', '#800000', '#ff6666', '#b30000', '#cc2200', '#ff4d4d']
@@ -120,7 +120,7 @@ class RealisticLeaf {
     }
 }
 
-export default function LeafCanvas() {
+function LeafCanvas() {
     const canvasRef = useRef(null)
     const leavesRef = useRef([])
     const isHoveringRef = useRef(false)
@@ -130,7 +130,7 @@ export default function LeafCanvas() {
         const canvas = canvasRef.current
         if (!canvas) return
 
-        const ctx = canvas.getContext('2d')
+        const ctx = canvas.getContext('2d', { alpha: true }) // Optimize canvas context
         if (!ctx) return
 
         const resizeCanvas = () => {
@@ -167,11 +167,19 @@ export default function LeafCanvas() {
 
         animate()
 
-        window.addEventListener('resize', resizeCanvas)
+        // Debounce resize
+        let resizeTimeout;
+        const handleResize = () => {
+            if (resizeTimeout) clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(resizeCanvas, 200);
+        };
+
+        window.addEventListener('resize', handleResize)
 
         return () => {
             cancelAnimationFrame(animationRef.current)
-            window.removeEventListener('resize', resizeCanvas)
+            window.removeEventListener('resize', handleResize)
+            if (resizeTimeout) clearTimeout(resizeTimeout)
         }
     }, [])
 
@@ -203,3 +211,5 @@ export default function LeafCanvas() {
         </>
     )
 }
+
+export default memo(LeafCanvas)

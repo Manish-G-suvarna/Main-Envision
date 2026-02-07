@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react' // Consolidation if needed, but just replacing relevant lines
+import { useRef, useState, useEffect, useMemo } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 import gsap from 'gsap'
@@ -6,7 +6,6 @@ import './Navbar.css'
 import Torch from './Torch'
 
 // Icons no longer used as components if all are images now
-// import { EventsIcon } from './NavIcons' 
 import homeIconImg from '../assets/nav-icon/home-icon.png'
 import profileIconImg from '../assets/nav-icon/profile-icon.png'
 import eventIconImg from '../assets/nav-icon/event-icon.png'
@@ -19,15 +18,14 @@ export default function Navbar() {
     const navContainerRef = useRef(null)
     const isAutoScrolling = useRef(false) // Track if scroll is initiated by click
 
-
     const [isNavVisible, setIsNavVisible] = useState(true)
-    const [lastScrollY, setLastScrollY] = useState(0)
+    const lastScrollY = useRef(0) // Use ref for tracking last scroll position to avoid re-renders just for logic
 
-    const navLinks = [
+    const navLinks = useMemo(() => [
         { id: 'home', label: 'Home', iconImg: homeIconImg },
         { id: 'events', label: 'Event', iconImg: eventIconImg },
         { id: 'profile', label: 'Profile', iconImg: profileIconImg },
-    ]
+    ], [])
 
     const handleLinkClick = (id, e) => {
         e.preventDefault()
@@ -59,48 +57,53 @@ export default function Navbar() {
 
     // Handle scroll behavior - hide on scroll down, show on scroll up
     useEffect(() => {
+        let ticking = false;
+
         const handleScroll = () => {
-            const currentScrollY = window.scrollY
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const currentScrollY = window.scrollY
+                    const prevScrollY = lastScrollY.current;
 
-            // Navbar visibility logic
-            if (currentScrollY === 0) {
-                setIsNavVisible(true)
-                navContainerRef.current?.classList.remove('floating-nav')
-            } else if (currentScrollY > lastScrollY) {
-                if (!isAutoScrolling.current) {
-                    setIsNavVisible(false)
-                }
-                navContainerRef.current?.classList.add('floating-nav')
-            } else if (currentScrollY < lastScrollY) {
-                setIsNavVisible(true)
-                navContainerRef.current?.classList.add('floating-nav')
-            }
-            setLastScrollY(currentScrollY)
+                    // Navbar visibility logic
+                    if (currentScrollY === 0) {
+                        setIsNavVisible(true)
+                        navContainerRef.current?.classList.remove('floating-nav')
+                    } else if (currentScrollY > prevScrollY) {
+                        if (!isAutoScrolling.current) {
+                            setIsNavVisible(false)
+                        }
+                        navContainerRef.current?.classList.add('floating-nav')
+                    } else if (currentScrollY < prevScrollY) {
+                        setIsNavVisible(true)
+                        navContainerRef.current?.classList.add('floating-nav')
+                    }
 
-            // Scroll Spy Logic
-            if (!isAutoScrolling.current) {
-                // Profile doesn't have a section, so we keep it if manually selected until another section is hit?
-                // Or maybe just Home and Events for now as per icons.
+                    lastScrollY.current = currentScrollY;
 
-                // Simple check for Home and Events
-                const homeSection = document.getElementById('home')
-                const eventSection = document.getElementById('events')
+                    // Scroll Spy Logic
+                    if (!isAutoScrolling.current) {
+                        const homeSection = document.getElementById('home')
+                        const eventSection = document.getElementById('events')
+                        const scrollOffset = window.innerHeight * 0.3
 
-                // Offset to trigger active state a bit earlier
-                const scrollOffset = window.innerHeight * 0.3
+                        if (eventSection && window.scrollY + scrollOffset >= eventSection.offsetTop) {
+                            setActiveLink('events')
+                        } else if (homeSection) {
+                            setActiveLink('home')
+                        }
+                    }
 
-                if (eventSection && window.scrollY + scrollOffset >= eventSection.offsetTop) {
-                    setActiveLink('events')
-                } else if (homeSection) {
-                    // Default to home if above events (and assuming home is at top)
-                    setActiveLink('home')
-                }
+                    ticking = false;
+                });
+
+                ticking = true;
             }
         }
 
-        window.addEventListener('scroll', handleScroll)
+        window.addEventListener('scroll', handleScroll, { passive: true })
         return () => window.removeEventListener('scroll', handleScroll)
-    }, [lastScrollY])
+    }, [])
 
     // Animate navbar visibility with GSAP
     useEffect(() => {
@@ -142,7 +145,7 @@ export default function Navbar() {
                     ))}
                 </ul>
                 <Torch className="torch-right" />
-                <button className="register-login-btn navbar-btn">
+                <button className="register-login-btn navbar-btn" onClick={() => navigate('/admin')}>
                     REGISTER / LOGIN
                 </button>
             </div>

@@ -11,8 +11,16 @@ export async function fetchEvents() {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const events = await response.json();
-        return events;
+
+        // Safe JSON parsing
+        const text = await response.text();
+        try {
+            const events = JSON.parse(text);
+            return events;
+        } catch (e) {
+            console.error('Failed to parse events JSON:', text);
+            throw new Error('Invalid JSON response from server');
+        }
     } catch (error) {
         console.error('Error fetching events:', error);
         throw error;

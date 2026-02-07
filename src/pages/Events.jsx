@@ -1,11 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import './Events.css';
 import mainBg from '../assets/main-bg.png';
 import { fetchEvents } from '../services/api';
 import { EventCard } from '../components/EventCard';
 
+// Category mapping for filtering - Moved outside to prevent recreation
+const CATEGORIES = [
+    'All Categories',
+    'Technical',
+    'Non-Technical'
+];
+
 export default function Events() {
+    console.log('Events Component Rendering...'); // DEBUG LOG
+    const [currentPage, setCurrentPage] = useState(1);
+    const ITEMS_PER_PAGE = 6;
+
+    // Restoring missing state
     const [searchQuery, setSearchQuery] = useState('');
     const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('All Categories');
@@ -13,49 +25,90 @@ export default function Events() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Category mapping for filtering
-    const categories = [
-        'All Categories',
-        'Technical',
-        'Non-Technical'
-    ];
-
     useEffect(() => {
+        let isMounted = true;
+        const loadEvents = async () => {
+            try {
+                setLoading(true);
+                const data = await fetchEvents();
+                console.log('Raw Events Data:', data); // DEBUG LOG
+                if (isMounted) {
+                    // Fix: Ensure data is an array AND filter out null/undefined items
+                    const validEvents = Array.isArray(data)
+                        ? data.filter(e => e && typeof e === 'object' && e.id)
+                        : [];
+
+                    console.log('Valid Events:', validEvents); // DEBUG LOG
+                    setEvents(validEvents);
+                    setError(null);
+                }
+            } catch (err) {
+                if (isMounted) {
+                    setError('Failed to load events. Please make sure the backend server is running.');
+                    console.error('Error loading events:', err);
+                }
+            } finally {
+                if (isMounted) {
+                    setLoading(false);
+                }
+            }
+        };
+
         loadEvents();
+
+        return () => {
+            isMounted = false;
+        };
     }, []);
 
-    const loadEvents = async () => {
-        try {
-            setLoading(true);
-            const data = await fetchEvents();
-            setEvents(data);
-            setError(null);
-        } catch (err) {
-            setError('Failed to load events. Please make sure the backend server is running.');
-            console.error('Error loading events:', err);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleCategorySelect = (category) => {
+    const handleCategorySelect = useCallback((category) => {
         setSelectedCategory(category);
         setShowCategoryDropdown(false);
+        setCurrentPage(1); // Reset to page 1 on filter change
+    }, []);
+
+    const handleSearchChange = useCallback((e) => {
+        setSearchQuery(e.target.value);
+        setCurrentPage(1); // Reset to page 1 on search change
+    }, []);
+
+    const toggleDropdown = useCallback(() => {
+        setShowCategoryDropdown(prev => !prev);
+    }, []);
+
+    // Filter events based on search and category - Memoized
+    const filteredEvents = useMemo(() => {
+        return events.filter(event => {
+            // Safe access using optional chaining and fallbacks
+            const eventName = event.name || '';
+            const eventDesc = event.description || '';
+
+            // Search filter (event name or description)
+            const matchesSearch = searchQuery === '' ||
+                eventName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                eventDesc.toLowerCase().includes(searchQuery.toLowerCase());
+
+            // Category filter
+            const matchesCategory = selectedCategory === 'All Categories' ||
+                event.type === selectedCategory;
+
+            return matchesSearch && matchesCategory;
+        });
+    }, [events, searchQuery, selectedCategory]);
+
+    // Pagination Logic
+    const totalPages = Math.ceil(filteredEvents.length / ITEMS_PER_PAGE);
+    const currentEvents = useMemo(() => {
+        const firstPageIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+        const lastPageIndex = firstPageIndex + ITEMS_PER_PAGE;
+        return filteredEvents.slice(firstPageIndex, lastPageIndex);
+    }, [currentPage, filteredEvents]);
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+        // Scroll to top of grid or just slightly up
+        window.scrollTo({ top: 300, behavior: 'smooth' });
     };
-
-    // Filter events based on search and category
-    const filteredEvents = events.filter(event => {
-        // Search filter (event name or description)
-        const matchesSearch = searchQuery === '' ||
-            event.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            (event.description && event.description.toLowerCase().includes(searchQuery.toLowerCase()));
-
-        // Category filter
-        const matchesCategory = selectedCategory === 'All Categories' ||
-            event.type === selectedCategory;
-
-        return matchesSearch && matchesCategory;
-    });
 
     return (
         <div className="events-root" style={{ backgroundImage: `url(${mainBg})` }}>
@@ -107,7 +160,7 @@ export default function Events() {
                             type="text"
                             placeholder="Search epic quests here..."
                             value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
+                            onChange={handleSearchChange}
                         />
                         <svg viewBox="0 0 24 24" className="search-icon"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
                     </div>
@@ -116,13 +169,13 @@ export default function Events() {
                         <div className="category-dropdown-container">
                             <button
                                 className={`filter-btn ${showCategoryDropdown ? 'active' : ''}`}
-                                onClick={() => setShowCategoryDropdown(!showCategoryDropdown)}
+                                onClick={toggleDropdown}
                             >
                                 <span className="icon">✨</span> {selectedCategory}
                             </button>
                             {showCategoryDropdown && (
                                 <div className="category-dropdown-menu">
-                                    {categories.map((cat) => (
+                                    {CATEGORIES.map((cat) => (
                                         <div
                                             key={cat}
                                             className="category-item"
@@ -159,11 +212,49 @@ export default function Events() {
                         <p>No events found matching your criteria.</p>
                     </div>
                 ) : (
-                    <div className="events-bento-grid">
-                        {filteredEvents.map((event) => (
-                            <EventCard key={event.id} event={event} />
-                        ))}
-                    </div>
+                    <>
+                        <div className="events-bento-grid">
+                            {currentEvents.map((event) => (
+                                <EventCard key={event.id} event={event} />
+                            ))}
+                        </div>
+
+                        {/* Pagination Controls */}
+                        {totalPages > 1 && (
+                            <div className="pagination-container">
+                                <button
+                                    className="pagination-btn"
+                                    onClick={() => handlePageChange(currentPage - 1)}
+                                    disabled={currentPage === 1}
+                                >
+                                    &lt;
+                                </button>
+
+                                {[...Array(totalPages)].map((_, index) => {
+                                    const pageNum = index + 1;
+                                    // Logic for showing limited page numbers if needed, 
+                                    // for now showing all as total pages likely small
+                                    return (
+                                        <button
+                                            key={pageNum}
+                                            className={`pagination-btn ${currentPage === pageNum ? 'active' : ''}`}
+                                            onClick={() => handlePageChange(pageNum)}
+                                        >
+                                            {pageNum}
+                                        </button>
+                                    );
+                                })}
+
+                                <button
+                                    className="pagination-btn"
+                                    onClick={() => handlePageChange(currentPage + 1)}
+                                    disabled={currentPage === totalPages}
+                                >
+                                    &gt;
+                                </button>
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
         </div>

@@ -1133,3 +1133,61 @@ body::-webkit-scrollbar {
         left: 200%;
     }
 }
+
+/* Masonry Section Glass Box */
+.masonry-section {
+    width: 100%;
+    margin: 40px auto;
+    height: 450px;
+    position: relative;
+    padding: 20px;
+    /* Internal spacing */
+    border-radius: 16px;
+    /* Smooth corners */
+
+    /* Glassmorphism Effect */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(255, 185, 8, 0.15);
+    /* Subtle gold border */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
+    overflow: hidden;
+}
+
+/* View Gallery Button in Masonry */
+.view-gallery-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+
+    padding: 0.75rem 2rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #ffd700;
+
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #ffb908;
+    border-radius: 8px;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.view-gallery-btn:hover {
+    background: rgba(255, 185, 8, 0.2);
+    box-shadow: 0 0 20px rgba(255, 185, 8, 0.4);
+    transform: translateX(-50%) scale(1.05);
+}

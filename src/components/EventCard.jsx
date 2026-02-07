@@ -2,6 +2,9 @@ import { useState, useRef } from 'react';
 import './EventCard.css';
 
 export const EventCard = ({ event }) => {
+    // Guard clause for safety
+    if (!event) return null;
+
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
     const [hoverOpacity, setHoverOpacity] = useState(0);
     const cardRef = useRef(null);
