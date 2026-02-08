@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Profile.css';
 import logo from '../assets/logo.png';
 import mainBg from '../assets/main-bg.png';
+import CountdownTimer from '../components/CountdownTimer';
 
 export default function Profile() {
     // State to track if profile is completed
@@ -36,17 +37,37 @@ export default function Profile() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // Basic validation
         if (Object.values(formData).every(val => val.trim() !== '')) {
-            localStorage.setItem('envision_profile_v2', JSON.stringify(formData));
-            setIsProfileComplete(true);
+            try {
+                // Pointing to Node.js Server
+                const response = await fetch('http://localhost:5000/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('envision_profile_v2', JSON.stringify(formData));
+                    setIsProfileComplete(true);
+                    alert('Registration Successful!');
+                } else {
+                    alert(data.message || 'Registration failed. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please check your connection.');
+            }
         } else {
             alert('Please fill in all fields');
         }
     };
-
     // If profile is NOT complete, show the Registration Split Screen
     if (!isProfileComplete) {
         return (
@@ -195,14 +216,29 @@ export default function Profile() {
                 </Link>
                 <div className="nav-right">
                     <Link to="/events" className="nav-btn">
-                        Events
-                        <svg viewBox="0 0 24 24" className="icon" style={{ width: 18, height: 18 }}><path fill="currentColor" d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path></svg>
+                        Cart
+                        <svg viewBox="0 0 24 24" className="icon" style={{ width: 18, height: 18 }}><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"></path></svg>
                     </Link>
                 </div>
             </nav>
 
-            <div className="profile-glass-container" style={{ position: 'relative', zIndex: 5 }}>
-                <h1 style={{ fontSize: '2.5rem', color: '#ffd700', marginBottom: '1rem' }}>Student Profile</h1>
+            <div className="profile-glass-container" style={{ position: 'relative', zIndex: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <h1 style={{ fontSize: '3.0rem', color: '#ffd700', marginBottom: '1rem', textAlign: 'center' }}>Student Profile</h1>
+                <div style={{
+                    width: '160px',
+                    height: '160px',
+                    margin: '0 auto 1.5rem',
+                    border: '2px solid #ffd700',
+                    borderRadius: '12px',
+                    overflow: 'hidden',
+                    boxShadow: '0 0 15px rgba(255, 215, 0, 0.3)'
+                }}>
+                    <img
+                        src="https://loremflickr.com/320/320/samurai"
+                        alt="Samurai"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                </div>
 
                 <div className="profile-header-info" style={{ textAlign: 'center', marginBottom: '3rem' }}>
                     <h2 style={{ fontSize: '2rem', color: 'white', margin: 0 }}>{formData.fullName}</h2>
@@ -210,32 +246,30 @@ export default function Profile() {
                     <p style={{ color: '#aaa', margin: 0 }}>{formData.college}</p>
                 </div>
 
-                <div className="profile-stats-card" style={{ display: 'flex', gap: '3rem', background: 'rgba(255,255,255,0.05)', padding: '2rem 4rem', borderRadius: '1rem', border: '1px solid rgba(255,255,255,0.1)', marginBottom: '3rem' }}>
-                    <div style={{ textAlign: 'center' }}>
-                        <span style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#ff9d00', display: 'block' }}>0</span>
-                        <span style={{ fontSize: '1rem', color: '#e0e0e0', textTransform: 'uppercase' }}>Events Registered</span>
+                <div className="profile-stats-card" style={{ display: 'flex', gap: '4rem', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.05)', padding: '0.5rem 3rem', borderRadius: '1rem', border: '1px solid rgba(255,255,255,0.1)', marginBottom: '3rem' }}>
+                    <div style={{ textAlign: 'center', minWidth: '200px' }}>
+                        <span style={{ fontSize: '3.5rem', fontWeight: 'bold', color: '#ff9d00', display: 'block', lineHeight: 1 }}>0</span>
+                        <span style={{ fontSize: '0.9rem', color: '#e0e0e0', textTransform: 'uppercase', marginTop: '0.5rem', display: 'block' }}>Events Registered</span>
+                    </div>
+
+                    <div style={{ height: '80px', width: '1px', background: 'rgba(255,255,255,0.1)' }}></div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '5rem', marginLeft: '7rem' }}>
+                        <div style={{ transform: 'scale(0.8)' }}>
+                            <CountdownTimer targetDate="2026-01-28T00:00:00" />
+                        </div>
                     </div>
                 </div>
 
                 <div className="profile-tabs" style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
                     <button style={{ background: 'transparent', border: 'none', color: '#ffd700', padding: '0.8rem 2rem', fontSize: '1.1rem', borderBottom: '2px solid #ffd700', cursor: 'pointer' }}>My Events</button>
-                    <button style={{ background: 'transparent', border: 'none', color: '#aaa', padding: '0.8rem 2rem', fontSize: '1.1rem', cursor: 'pointer' }}>Certificates</button>
+
                 </div>
 
                 <div className="profile-content-area" style={{ width: '100%', minHeight: '200px', background: 'rgba(0,0,0,0.2)', borderRadius: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#888' }}>
                     <p>You haven't registered for any events yet.</p>
                 </div>
 
-                {/* Reset Button for Testing */}
-                <button
-                    onClick={() => {
-                        localStorage.removeItem('envision_profile_v2');
-                        setIsProfileComplete(false);
-                    }}
-                    style={{ marginTop: '2rem', background: 'rgba(255,255,255,0.1)', border: 'none', color: '#666', padding: '0.5rem 1rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.8rem' }}
-                >
-                    Reset Profile (Debug)
-                </button>
             </div>
         </div>
     );

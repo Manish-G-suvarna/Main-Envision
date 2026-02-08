@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'Lucentia';
+    src: url('./assets/lucentia-font/LucentiaDemoRegular-woDw9.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Quera';
+    src: url('./assets/quera-font/QuerademoRegular-Zp7ZB.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* Scroll Indicator */
 .scroll-indicator-container {
     position: fixed;
@@ -103,8 +117,8 @@
 }
 
 .bg-video {
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 0%, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 0%, black 70%, transparent 98%);
 }
 
 .bg-image-section {
@@ -478,14 +492,75 @@ body::-webkit-scrollbar {
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
 }
 
-.hero-institute-logo {
-    display: block;
-    max-width: 600px;
+.hero-institute-name {
+    display: flex;
+    top: 8em;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 4rem auto 2rem auto;
+    max-width: 900px;
     width: 100%;
-    height: auto;
-    object-fit: contain;
-    margin: 2rem auto;
-    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.2));
+    z-index: 20;
+    position: relative;
+}
+
+.hero-institute-name h4 {
+    font-family: 'Quera', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin: 0;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    background: linear-gradient(90deg, #ffffff 0%, #ffffff 50%, #cbd6e0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-institute-name p {
+    font-family: 'Quera', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    color: #ff4e4e;
+    margin: 0.5rem 0;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.hero-institute-name h1 {
+    font-family: 'Lucentia', sans-serif;
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1;
+    margin: 0;
+
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #f84c4c;
+    background: rgb(255, 226, 225);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 768px) {
+    .hero-institute-name h4 {
+        font-size: 1.2rem;
+        letter-spacing: 0.2em;
+    }
+
+    .hero-institute-name p {
+        font-size: 1rem;
+    }
+
+    .hero-institute-name h1 {
+        font-size: 3.5rem;
+    }
 }
 
 .hero-details {
@@ -497,13 +572,13 @@ body::-webkit-scrollbar {
 
 /* ===== Hero Description Box ===== */
 .hero-description-box {
-    width: 95%;
+    width: 74%;
     max-width: 1300px;
     background: linear-gradient(135deg, rgba(20, 15, 10, 0.627) 0%, rgba(40, 25, 15, 0.622) 100%);
     border: 1px solid rgba(255, 185, 8, 0.3);
     border-radius: 12px;
     padding: 2rem 2.5rem;
-    margin-top: -9rem;
+    margin-top: 8rem;
     position: relative;
     /* Needed for pseudo-element positioning */
     /* Increased negative margin to pull box up further */
@@ -543,7 +618,7 @@ body::-webkit-scrollbar {
     position: relative;
     z-index: 1;
     /* Ensure text is above the overlay */
-    font-family: 'Rajdhani', sans-serif;
+    font-family: 'Quera', sans-serif;
     font-size: 1.1rem;
     line-height: 1.7;
     color: #f6d7d7;
@@ -560,7 +635,7 @@ body::-webkit-scrollbar {
     /* "create small description-box... with same css" */
     width: auto;
     /* Small width, fits content */
-    min-width: 200px;
+    min-width: 150px;
     background: linear-gradient(135deg, rgba(20, 15, 10, 0.627) 0%, rgba(40, 25, 15, 0.622) 100%);
     border: 1px solid rgba(255, 185, 8, 0.3);
     border-radius: 12px;
@@ -574,7 +649,6 @@ body::-webkit-scrollbar {
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 0 60px rgba(139, 69, 19, 0);
     transition: border-color 0.5s ease-in-out;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -605,7 +679,7 @@ body::-webkit-scrollbar {
 .hero-info-month {
     position: relative;
     z-index: 1;
-    font-family: 'Rajdhani', sans-serif;
+    font-family: 'Lucentia', sans-serif;
     font-size: 2rem;
     /* Big size */
     font-weight: 700;
@@ -616,7 +690,7 @@ body::-webkit-scrollbar {
 .hero-info-day {
     position: relative;
     z-index: 1;
-    font-family: 'Rajdhani', sans-serif;
+    font-family: 'Quera', sans-serif;
     font-size: 1rem;
     /* Small size */
     font-weight: 500;
@@ -636,7 +710,7 @@ body::-webkit-scrollbar {
 .hero-info-category {
     position: relative;
     z-index: 1;
-    font-family: 'Rajdhani', sans-serif;
+    font-family: 'Quera', sans-serif;
     font-size: 0.8rem;
     /* Smaller than other */
     opacity: 0.8;
@@ -667,7 +741,7 @@ body::-webkit-scrollbar {
 }
 
 .stat-number {
-    font-family: 'Times New Roman', serif;
+    font-family: 'Lucentia', serif;
     /* Matching reference style */
     font-size: 3rem;
     font-weight: 700;
@@ -678,7 +752,7 @@ body::-webkit-scrollbar {
 }
 
 .stat-label {
-    font-family: 'Rajdhani', sans-serif;
+    font-family: 'Quera', sans-serif;
     font-size: 0.9rem;
     color: #f6d7d7;
     text-transform: uppercase;
@@ -699,7 +773,7 @@ body::-webkit-scrollbar {
 }
 
 .events-intro-title {
-    font-family: 'Times New Roman', serif;
+    font-family: 'Lucentia', serif;
     /* Or a specific serif font if available */
     font-size: 3rem;
     font-weight: 700;
@@ -713,7 +787,7 @@ body::-webkit-scrollbar {
 .events-intro-divider {
     width: 60%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(247, 189, 15, 0.5), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
     margin: 1rem 0;
 }
 
@@ -732,7 +806,7 @@ body::-webkit-scrollbar {
 /* ===== Bento Grid Layout ===== */
 .bento-grid-container {
     width: 95%;
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 2rem auto 8rem auto;
     display: flex;
     flex-direction: column;
@@ -745,7 +819,7 @@ body::-webkit-scrollbar {
     position: relative;
     border-radius: 0.5rem;
     overflow: hidden;
-    border: 1px solid rgba(255, 185, 8, 0.2);
+    border: 1px solid rgb(255, 245, 220);
     /* transition handled by BentoTilt */
 }
 
@@ -759,7 +833,7 @@ body::-webkit-scrollbar {
 @media (min-width: 768px) {
     .bento-grid-row-2 {
         grid-template-columns: 1fr 1fr;
-        height: 600px;
+        height: 500px;
         /* Fixed height for the row on desktop to align tall vs stack */
     }
 }
@@ -783,10 +857,10 @@ body::-webkit-scrollbar {
 }
 
 .bento-card-standard {
-    width: 100%;
+    width: auto;
     flex: 1;
-    /* Take equal height in stack */
-    min-height: 250px;
+    height: 100px;
+    min-height: 248px;
     /* Fallback */
     position: relative;
     border-radius: 0.5rem;
@@ -890,7 +964,7 @@ body::-webkit-scrollbar {
     opacity: 0.8;
     pointer-events: none;
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 60%, transparent 100%);
 }
 
 /* Content Background Image (Extra Img 02) */
@@ -960,12 +1034,12 @@ body::-webkit-scrollbar {
 }
 
 .sponsors-section .section-title {
-    color: #f6d7d7;
+    color: #ff8a66;
     /* Requested non-gold color */
     margin-bottom: 3rem;
     font-size: 3rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-    font-family: 'Rajdhani', sans-serif;
+    font-family: 'Lucentia', sans-serif;
     letter-spacing: 0.1em;
 }
 
@@ -1023,10 +1097,7 @@ body::-webkit-scrollbar {
 
 .section h2 {
     font-size: 3rem;
-    color: #ffd700;
-    text-shadow:
-        2px 2px 4px rgba(0, 0, 0, 0.8),
-        0 0 30px rgba(255, 215, 0, 0.4);
+    color: #f13e3e;
     letter-spacing: 0.15em;
 }
 
@@ -1137,7 +1208,8 @@ body::-webkit-scrollbar {
 /* Masonry Section Glass Box */
 .masonry-section {
     width: 100%;
-    margin: 40px auto;
+    top: -100px;
+    margin: 30px auto;
     height: 450px;
     position: relative;
     padding: 20px;
@@ -1190,4 +1262,79 @@ body::-webkit-scrollbar {
     background: rgba(255, 185, 8, 0.2);
     box-shadow: 0 0 20px rgba(255, 185, 8, 0.4);
     transform: translateX(-50%) scale(1.05);
+}
+
+.events-section {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.events-section-bg-image {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    max-width: none;
+    height: 90%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.8;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+}
+
+.sponsors-section-container {
+    position: relative;
+    top: -30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sponsors-section-bg-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    max-width: none;
+    height: 50%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.8;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 80%, transparent 100%);
+}
+
+.masonry-section-container {
+    position: relative;
+    top: -40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.masonry-section-bg-image {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    max-width: none;
+    height: 125%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.8;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 80%, transparent 100%);
 }

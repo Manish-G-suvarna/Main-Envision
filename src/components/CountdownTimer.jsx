@@ -1,36 +1,36 @@
-import { useState, useEffect, memo } from 'react'
+import { useState, useEffect } from 'react'
 import './CountdownTimer.css'
 
-const calculateTimeLeft = (targetDate) => {
-    const difference = +new Date(targetDate) - +new Date()
-    let timeLeft = { days: 0, hours: 0, minutes: 0, seconds: 0 }
+export default function CountdownTimer({ targetDate }) {
+    const calculateTimeLeft = () => {
+        const difference = +new Date(targetDate) - +new Date()
+        let timeLeft = { days: 0, hours: 0, minutes: 0, seconds: 0 }
 
-    if (difference > 0) {
-        timeLeft = {
-            days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-            hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-            minutes: Math.floor((difference / 1000 / 60) % 60),
-            seconds: Math.floor((difference / 1000) % 60)
+        if (difference > 0) {
+            timeLeft = {
+                days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+                hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+                minutes: Math.floor((difference / 1000 / 60) % 60),
+                seconds: Math.floor((difference / 1000) % 60)
+            }
         }
+
+        return timeLeft
     }
 
-    return timeLeft
-}
-
-const formatNumber = (num) => {
-    return num < 10 ? `0${num}` : num.toString()
-}
-
-const CountdownTimer = ({ targetDate }) => {
-    const [timeLeft, setTimeLeft] = useState(() => calculateTimeLeft(targetDate))
+    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft())
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setTimeLeft(calculateTimeLeft(targetDate))
+            setTimeLeft(calculateTimeLeft())
         }, 1000)
 
         return () => clearInterval(timer)
     }, [targetDate])
+
+    const formatNumber = (num) => {
+        return num < 10 ? `0${num}` : num.toString()
+    }
 
     return (
         <div className="countdown-container">
@@ -68,5 +68,3 @@ const CountdownTimer = ({ targetDate }) => {
         </div>
     )
 }
-
-export default memo(CountdownTimer)

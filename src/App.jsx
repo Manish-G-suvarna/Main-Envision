@@ -13,7 +13,10 @@ import mainBg from './assets/main-bg.png'
 import extraImg01 from './assets/all-bg/extra-img-01.png'
 import timmerBanner from './assets/timmer-banner.png'
 import extraImg02 from './assets/all-bg/extra-img-02.png'
-import startingLogo from './assets/Starting-logo.png'
+import extraImg03 from './assets/all-bg/extra-img-03.png'
+import extraImg04 from './assets/all-bg/extra-img-04.png'
+import extraImg05 from './assets/all-bg/extra-img-05.png'
+
 import allEventsBg from './assets/events/all-events.png'
 import nonTechBg from './assets/events/non-tech.png'
 import Masonry from './components/Masonry';
@@ -126,7 +129,11 @@ export default function App() {
               alt=""
               className="content-bg-image"
             />
-            <img src={startingLogo} alt="Srinivas Institute of Technology" className="hero-institute-logo" />
+            <div className="hero-institute-name">
+              <h4>SRINIVAS INSTITUTE OF TECHNOLOGY</h4>
+              <p>presents</p>
+              <h1>ENVISION</h1>
+            </div>
 
             {/* Envision Description Box */}
             <div className="hero-description-box">
@@ -164,104 +171,114 @@ export default function App() {
             </div>
           </div>
 
-          {/* Events Intro Section */}
-          <div className="events-intro">
-            <h2 className="events-intro-title">EVENTS YOU CANT MISS</h2>
-            <div className="events-intro-divider"></div>
-            <p className="events-intro-subtitle">
-              One day. Infinite impact. Step into the experience.
-            </p>
-          </div>
+          <div className="events-section">
+            <img src={extraImg03} alt="" className="events-section-bg-image" />
+            {/* Events Intro Section */}
+            <div className="events-intro">
+              <h2 className="events-intro-title">EVENTS YOU CANT MISS</h2>
+              <div className="events-intro-divider"></div>
+              <p className="events-intro-subtitle">
+                One day. Infinite impact. Step into the experience.
+              </p>
+            </div>
 
-          {/* Bento Grid Layout */}
-          <div className="bento-grid-container">
-            {/* Row 1: All Events (Wide) */}
-            <BentoTilt className="bento-card-wide">
-              <BentoCard
-                src={allEventsBg}
-                title="ALL EVENTS"
-                description="Explore every challenge and celebration."
-              />
-            </BentoTilt>
-
-            {/* Row 2: Mega Events (Left) & Stack (Right) */}
-            <div className="bento-grid-row-2">
-              {/* Mega Events - Tall */}
-              <BentoTilt className="bento-card-tall">
+            {/* Bento Grid Layout */}
+            <div className="bento-grid-container">
+              {/* Row 1: All Events (Wide) */}
+              <BentoTilt className="bento-card-wide">
                 <BentoCard
-                  src={mainBg}
-                  title="MEGA EVENTS"
-                  description="The biggest showdowns."
+                  src={allEventsBg}
+                  title="ALL EVENTS"
+                  description="Explore every challenge and celebration."
                 />
               </BentoTilt>
 
-              {/* Right Stack */}
-              <div className="bento-stack-right">
-                <BentoTilt className="bento-card-standard">
+              {/* Row 2: Mega Events (Left) & Stack (Right) */}
+              <div className="bento-grid-row-2">
+                {/* Mega Events - Tall */}
+                <BentoTilt className="bento-card-tall">
                   <BentoCard
                     src={mainBg}
-                    title="TECHNICAL"
-                    description="Innovate, build, and conquer."
+                    title="MEGA EVENTS"
+                    description="The biggest showdowns."
                   />
                 </BentoTilt>
 
-                <BentoTilt className="bento-card-standard">
-                  <BentoCard
-                    src={nonTechBg}
-                    title="NON TECHNICAL"
-                    description="Creativity beyond code."
-                  />
-                </BentoTilt>
+                {/* Right Stack */}
+                <div className="bento-stack-right">
+                  <BentoTilt className="bento-card-standard">
+                    <BentoCard
+                      src={mainBg}
+                      title="TECHNICAL"
+                      description="Innovate, build, and conquer."
+                    />
+                  </BentoTilt>
+
+                  <BentoTilt className="bento-card-standard">
+                    <BentoCard
+                      src={nonTechBg}
+                      title="NON TECHNICAL"
+                      description="Creativity beyond code."
+                    />
+                  </BentoTilt>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Sponsors Section */}
-          <div className="section sponsors-section">
-            <h2 className="section-title">OUR SPONSORS</h2>
-            <div className="marquee-wrapper">
-              <div className="marquee-content">
-                {[...Array(10)].map((_, i) => (
-                  <div key={`sponsor-${i}`} className="sponsor-card">
-                    <div className="sponsor-content">SPONSOR {i + 1}</div>
-                  </div>
-                ))}
-                {/* Duplicate for seamless loop */}
-                {[...Array(10)].map((_, i) => (
-                  <div key={`sponsor-dup-${i}`} className="sponsor-card">
-                    <div className="sponsor-content">SPONSOR {i + 1}</div>
-                  </div>
-                ))}
+          <div className="sponsors-section-container">
+            {/* Sponsors Section */}
+            <div className="section sponsors-section">
+              <img src={extraImg04} alt="" className="sponsors-section-bg-image" />
+              <h2 className="section-title">OUR SPONSORS</h2>
+              <div className="marquee-wrapper">
+                <div className="marquee-content">
+                  {[...Array(10)].map((_, i) => (
+                    <div key={`sponsor-${i}`} className="sponsor-card">
+                      <div className="sponsor-content">SPONSOR {i + 1}</div>
+                    </div>
+                  ))}
+                  {/* Duplicate for seamless loop */}
+                  {[...Array(10)].map((_, i) => (
+                    <div key={`sponsor-dup-${i}`} className="sponsor-card">
+                      <div className="sponsor-content">SPONSOR {i + 1}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
           {/* Masonry Section */}
-          <div className="masonry-section">
-            <Masonry
-              items={[
-                { id: 1, img: allEventsBg, height: 400, url: '#' },
-                { id: 2, img: mainBg, height: 300, url: '#' },
-                { id: 3, img: nonTechBg, height: 500, url: '#' },
-                { id: 4, img: extraImg01, height: 350, url: '#' },
-                { id: 5, img: extraImg02, height: 450, url: '#' },
-                { id: 6, img: heroTitleImg, height: 300, url: '#' },
-              ]}
-              ease="power3.out"
-              duration={0.6}
-              stagger={0.05}
-              animateFrom="bottom"
-              scaleOnHover
-              hoverScale={0.95}
-              blurToFocus
-              colorShiftOnHover={false}
-            />
-            <div
-              className="view-gallery-btn"
-              onClick={() => setShowGallery(true)}
-            >
-              VIEW GALLERY
+          <div className="masonry-section-container">
+            <img src={extraImg05} alt="" className="masonry-section-bg-image" />
+            <div className="masonry-section ">
+              <Masonry
+                items={[
+                  { id: 1, img: allEventsBg, height: 400, url: '#' },
+                  { id: 2, img: mainBg, height: 300, url: '#' },
+                  { id: 3, img: nonTechBg, height: 500, url: '#' },
+                  { id: 4, img: extraImg01, height: 350, url: '#' },
+                  { id: 5, img: extraImg02, height: 450, url: '#' },
+                  { id: 6, img: heroTitleImg, height: 300, url: '#' },
+                ]}
+                ease="power3.out"
+                duration={0.6}
+                stagger={0.05}
+                animateFrom="bottom"
+                scaleOnHover
+                hoverScale={0.95}
+                blurToFocus
+                colorShiftOnHover={false}
+              />
+              <div
+                className="view-gallery-btn"
+                onClick={() => setShowGallery(true)}
+              >
+                VIEW GALLERY
+              </div>
             </div>
           </div>
+
 
           {/* Scroll Indicator */}
           <ScrollIndicator />
