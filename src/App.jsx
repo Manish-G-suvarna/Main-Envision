@@ -6,6 +6,7 @@ import { BentoTilt } from './components/BentoTilt'
 import { BentoCard } from './components/BentoCard'
 import Footer from './components/Footer'
 import ScrollIndicator from './components/ScrollIndicator'
+import ScrollReveal from './components/ScrollReveal'
 import './App.css'
 import heroTitleImg from './assets/hero-title.png'
 import landscapeVideo from './assets/bg-video/landscape.mp4'
@@ -112,15 +113,18 @@ export default function App() {
         <section id="home" className="section hero-section">
           <img src={heroTitleImg} alt="ENVISION" className="hero-title-img" />
 
-
           <div className="timer-bg-container">
             <img
               src={extraImg01}
               alt=""
               className="timer-bg-image"
             />
-            <img src={timmerBanner} alt="28th January 2026" className="timmer-banner" />
-            <CountdownTimer targetDate="2026-03-28T00:00:00" />
+            <ScrollReveal>
+              <img src={timmerBanner} alt="28th January 2026" className="timmer-banner" />
+            </ScrollReveal>
+            <ScrollReveal delay={150}>
+              <CountdownTimer targetDate="2026-03-28T00:00:00" />
+            </ScrollReveal>
           </div>
 
           <div className="content-bg-container">
@@ -129,29 +133,29 @@ export default function App() {
               alt=""
               className="content-bg-image"
             />
-            <div className="hero-institute-name">
+            <ScrollReveal className="hero-institute-name">
               <h4>SRINIVAS INSTITUTE OF TECHNOLOGY</h4>
               <p>presents</p>
               <h1>ENVISION</h1>
-            </div>
+            </ScrollReveal>
 
             {/* Envision Description Box */}
-            <div className="hero-description-box">
+            <ScrollReveal className="hero-description-box">
               <p className="hero-description-text">
                 ENVISION is a one-day national-level techno-cultural fest that brings together students, innovators, and creators for an intense celebration of skill, creativity, and competition. Blending cutting-edge technology with vibrant cultural expression, ENVISION features a curated lineup of technical challenges, cultural events, and interactive experiences designed to push boundaries and spark inspiration. From problem-solving and innovation to performance and play, the fest captures the spirit of modern youth in a single, high-energy day. Join us at Srinivas Institute of Technology, Valachil, and experience a festival where tradition meets technology and ideas come alive.
               </p>
-            </div>
+            </ScrollReveal>
 
             {/* Date & Event Info Box */}
-            <div className="hero-info-box">
+            <ScrollReveal delay={100} className="hero-info-box">
               <div className="hero-info-month">FABRUARY</div>
               <div className="hero-info-day">DAY 1</div>
               <div className="hero-info-divider"></div>
               <div className="hero-info-category">Events</div>
-            </div>
+            </ScrollReveal>
 
             {/* Statistics Row */}
-            <div className="hero-stats">
+            <ScrollReveal delay={150} className="hero-stats">
               <div className="stat-item">
                 <div className="stat-number">01</div>
                 <div className="stat-label">DAY OF FUN</div>
@@ -168,22 +172,22 @@ export default function App() {
                 <div className="stat-number">1000+</div>
                 <div className="stat-label">PARTICIPANTS</div>
               </div>
-            </div>
+            </ScrollReveal>
           </div>
 
           <div className="events-section">
             <img src={extraImg03} alt="" className="events-section-bg-image" />
             {/* Events Intro Section */}
-            <div className="events-intro">
+            <ScrollReveal className="events-intro">
               <h2 className="events-intro-title">EVENTS YOU CANT MISS</h2>
               <div className="events-intro-divider"></div>
               <p className="events-intro-subtitle">
                 One day. Infinite impact. Step into the experience.
               </p>
-            </div>
+            </ScrollReveal>
 
             {/* Bento Grid Layout */}
-            <div className="bento-grid-container">
+            <ScrollReveal className="bento-grid-container">
               {/* Row 1: All Events (Wide) */}
               <BentoTilt className="bento-card-wide">
                 <BentoCard
@@ -223,9 +227,8 @@ export default function App() {
                   </BentoTilt>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
           </div>
-
           <div className="sponsors-section-container">
             {/* Sponsors Section */}
             <div className="section sponsors-section">
