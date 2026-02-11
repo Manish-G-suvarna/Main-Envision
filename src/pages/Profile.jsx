@@ -4,11 +4,12 @@ import './Profile.css';
 import logo from '../assets/logo.png';
 import mainBg from '../assets/main-bg.png';
 import CountdownTimer from '../components/CountdownTimer';
+import { useCart } from '../context/CartContext';
 
 export default function Profile() {
+    const { cart, removeFromCart } = useCart();
     // State to track if profile is completed
     const [isProfileComplete, setIsProfileComplete] = useState(false);
-
     // Form state
     const [formData, setFormData] = useState({
         fullName: '',
@@ -215,8 +216,8 @@ export default function Profile() {
                     Go to Home
                 </Link>
                 <div className="nav-right">
-                    <Link to="/events" className="nav-btn">
-                        Cart
+                    <Link to="/cart" className="nav-btn">
+                        View Cart
                         <svg viewBox="0 0 24 24" className="icon" style={{ width: 18, height: 18 }}><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"></path></svg>
                     </Link>
                 </div>
@@ -248,7 +249,7 @@ export default function Profile() {
 
                 <div className="profile-stats-card" style={{ display: 'flex', gap: '4rem', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.05)', padding: '0.5rem 3rem', borderRadius: '1rem', border: '1px solid rgba(255,255,255,0.1)', marginBottom: '3rem' }}>
                     <div style={{ textAlign: 'center', minWidth: '200px' }}>
-                        <span style={{ fontSize: '3.5rem', fontWeight: 'bold', color: '#ff9d00', display: 'block', lineHeight: 1 }}>0</span>
+                        <span style={{ fontSize: '3.5rem', fontWeight: 'bold', color: '#ff9d00', display: 'block', lineHeight: 1 }}>{cart.length}</span>
                         <span style={{ fontSize: '0.9rem', color: '#e0e0e0', textTransform: 'uppercase', marginTop: '0.5rem', display: 'block' }}>Events Registered</span>
                     </div>
 
@@ -263,11 +264,30 @@ export default function Profile() {
 
                 <div className="profile-tabs" style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
                     <button style={{ background: 'transparent', border: 'none', color: '#ffd700', padding: '0.8rem 2rem', fontSize: '1.1rem', borderBottom: '2px solid #ffd700', cursor: 'pointer' }}>My Events</button>
-
                 </div>
 
-                <div className="profile-content-area" style={{ width: '100%', minHeight: '200px', background: 'rgba(0,0,0,0.2)', borderRadius: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#888' }}>
-                    <p>You haven't registered for any events yet.</p>
+                <div className="profile-content-area" style={{ width: '100%', minHeight: '200px', background: 'rgba(0,0,0,0.2)', borderRadius: '1rem', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem', color: '#888' }}>
+                    {cart.length === 0 ? (
+                        <p style={{ textAlign: 'center', margin: 'auto' }}>You haven't registered for any events yet.</p>
+                    ) : (
+                        <div className="profile-events-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem', width: '100%' }}>
+                            {cart.map((event) => (
+                                <div key={event.id} className="profile-event-card" style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '12px', padding: '1.5rem', border: '1px solid rgba(255,255,255,0.1)', position: 'relative' }}>
+                                    <h3 style={{ color: '#fff', fontSize: '1.2rem', marginBottom: '0.5rem' }}>{event.name}</h3>
+                                    <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.5rem' }}>{event.department}</p>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <span style={{ color: '#ff9d00', fontWeight: 'bold' }}>₹{event.fee}</span>
+                                        <button
+                                            onClick={() => removeFromCart(event.id)}
+                                            style={{ background: 'rgba(255, 0, 0, 0.2)', color: '#ff4d4d', border: '1px solid rgba(255, 0, 0, 0.3)', padding: '0.3rem 0.8rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.8rem' }}
+                                        >
+                                            Remove
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
             </div>

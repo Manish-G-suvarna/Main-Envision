@@ -306,7 +306,8 @@
 /* Bento Grid for Events */
 .events-bento-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    /* Display one event per row */
+    grid-template-columns: 1fr;
     gap: 1.5rem;
     width: 100%;
     margin-top: 2rem;

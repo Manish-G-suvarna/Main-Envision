@@ -119,9 +119,14 @@ export default function Navbar() {
         })
     }, [isNavVisible])
 
+    // ... (rest of component logic)
+
+    // ... (rest of component logic)
+
     return (
         <nav ref={navContainerRef} className="navbar">
             <div className="navbar-banner">
+                {/* ... (existing logo and torch) */}
                 <img src={logoImg} alt="Envision" className="navbar-logo" />
                 <Torch className="torch-left" />
                 <ul className="navbar-links">
@@ -143,6 +148,8 @@ export default function Navbar() {
                             </a>
                         </li>
                     ))}
+
+
                 </ul>
                 <Torch className="torch-right" />
                 <button className="register-login-btn navbar-btn" onClick={() => navigate('/admin')}>

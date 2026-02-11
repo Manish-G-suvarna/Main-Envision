@@ -213,7 +213,7 @@ export default function App() {
                   <BentoTilt className="bento-card-standard">
                     <BentoCard
                       src={mainBg}
-                      title="TECHNICAL"
+                      title="DETAILS"
                       description="Innovate, build, and conquer."
                     />
                   </BentoTilt>
@@ -221,7 +221,7 @@ export default function App() {
                   <BentoTilt className="bento-card-standard">
                     <BentoCard
                       src={nonTechBg}
-                      title="NON TECHNICAL"
+                      title="DETAILS"
                       description="Creativity beyond code."
                     />
                   </BentoTilt>
