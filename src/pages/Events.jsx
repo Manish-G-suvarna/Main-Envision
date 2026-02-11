@@ -8,8 +8,7 @@ import { EventCard } from '../components/EventCard';
 // Category mapping for filtering - Moved outside to prevent recreation
 const CATEGORIES = [
     'All Categories',
-    'Technical',
-    'Non-Technical'
+    'Details'
 ];
 
 export default function Events() {
@@ -93,8 +92,15 @@ export default function Events() {
                 eventDesc.toLowerCase().includes(searchQuery.toLowerCase());
 
             // Category filter
+            // Map 'Details' UI category to BOTH 'Technical' and 'Non-Technical' backend types
+            // Since everything is now 'Details', selecting it should show everything (except maybe Mega Events if they were separate?)
+            // Assuming we just want to match the label map.
+
+            // If selectedCategory is 'Details', we match both types.
+            // If 'All Categories', match everything.
+
             const matchesCategory = selectedCategory === 'All Categories' ||
-                event.type === selectedCategory;
+                (selectedCategory === 'Details' && (event.type === 'Technical' || event.type === 'Non-Technical'));
 
             return matchesSearch && matchesCategory;
         });
@@ -125,6 +131,7 @@ export default function Events() {
                     Go to Home
                 </Link>
                 <div className="nav-right">
+
                     <Link to="/profile" className="nav-btn dashboard-btn">
                         Dashboard
                         <svg viewBox="0 0 24 24" className="icon arrow-right"><path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg>

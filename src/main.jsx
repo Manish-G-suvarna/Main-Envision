@@ -12,6 +12,7 @@ import cloudFg from './assets/Loading/cloud.png'
 const App = lazy(() => import('./App.jsx'))
 const Events = lazy(() => import('./pages/Events.jsx'))
 const Profile = lazy(() => import('./pages/Profile.jsx'))
+const Cart = lazy(() => import('./pages/Cart.jsx'))
 
 const PageLoader = () => (
   <div style={{ position: 'fixed', inset: 0, zIndex: 99999, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000' }}>
@@ -39,24 +40,28 @@ const PageLoader = () => (
 
 // Import Admin component (eager load or lazy load)
 import Admin from './MyAdmin/admin.jsx'
+import { CartProvider } from './context/CartContext';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-      <Suspense fallback={<PageLoader />}>
-        <Routes>
-          <Route path="/admin" element={<Admin />} />
-          <Route element={<Layout />}>
-            <Route path="/" element={<App />} />
-            <Route path="/events" element={
-              <ErrorBoundary>
-                <Events />
-              </ErrorBoundary>
-            } />
-            <Route path="/profile" element={<Profile />} />
-          </Route>
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+    <CartProvider>
+      <BrowserRouter>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/admin" element={<Admin />} />
+            <Route element={<Layout />}>
+              <Route path="/" element={<App />} />
+              <Route path="/events" element={
+                <ErrorBoundary>
+                  <Events />
+                </ErrorBoundary>
+              } />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/cart" element={<Cart />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </CartProvider>
   </StrictMode>,
 )
