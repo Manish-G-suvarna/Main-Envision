@@ -360,3 +360,93 @@
         top: -30px;
     }
 }
+
+/* ===== Navbar Buttons ===== */
+.navbar-btn {
+    background: rgba(255, 157, 0, 0.15);
+    border: 1.5px solid rgba(255, 157, 0, 0.4);
+    color: #ff9d00;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+}
+
+.navbar-btn:hover {
+    background: rgba(255, 157, 0, 0.25);
+    border-color: rgba(255, 157, 0, 0.6);
+    box-shadow: 0 4px 12px rgba(255, 157, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.register-login-btn {
+    margin-left: 1rem;
+}
+
+/* ===== Cart Button ===== */
+.cart-btn {
+    position: relative;
+}
+
+.cart-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: linear-gradient(135deg, #ff6b6b, #ff5252);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 0.2rem 0.4rem;
+    border-radius: 50%;
+    min-width: 18px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
+}
+
+/* ===== Responsive Buttons ===== */
+@media (max-width: 768px) {
+    .navbar-btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.65rem;
+        gap: 0.3rem;
+    }
+
+    .register-login-btn {
+        margin-left: 0.5rem;
+    }
+
+    .cart-icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .cart-count {
+        font-size: 0.55rem;
+        padding: 0.15rem 0.3rem;
+        min-width: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-btn {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.6rem;
+    }
+
+    .register-login-btn {
+        margin-left: 0.3rem;
+    }
+}
