@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Lenis from 'lenis'
 import 'lenis/dist/lenis.css'
+import PageTransition from './PageTransition'
 
 export default function Layout() {
     const { pathname } = useLocation()
@@ -35,7 +36,9 @@ export default function Layout() {
 
     return (
         <div className="layout-wrapper">
+            <PageTransition />
             <Outlet />
         </div>
     )
 }
+

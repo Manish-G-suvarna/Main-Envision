@@ -9,7 +9,7 @@ import Torch from './Torch'
 import homeIconImg from '../assets/nav-icon/home-icon.png'
 import profileIconImg from '../assets/nav-icon/profile-icon.png'
 import eventIconImg from '../assets/nav-icon/event-icon.png'
-import logoImg from '../assets/logo.png'
+import logoImg from '../assets/ENVISION_logo.png'
 
 export default function Navbar() {
     const navigate = useNavigate()

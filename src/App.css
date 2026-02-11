@@ -153,6 +153,10 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
+    opacity: 0.5;
+    filter: brightness(0.6) blur(4px);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 60%, transparent 100%);
 }
 
 /* ===== Global Settings & Protection ===== */
@@ -953,7 +957,7 @@ body::-webkit-scrollbar {
 
 .timer-bg-image {
     position: absolute;
-    top: 80%;
+    top: 90%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100vw;
@@ -961,10 +965,11 @@ body::-webkit-scrollbar {
     height: 155%;
     object-fit: cover;
     z-index: -1;
-    opacity: 0.8;
+    opacity: 0.5;
+    filter: brightness(0.6) blur(4px);
     pointer-events: none;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 60%, transparent 100%);
 }
 
 /* Content Background Image (Extra Img 02) */
@@ -986,10 +991,11 @@ body::-webkit-scrollbar {
     height: 80%;
     object-fit: cover;
     z-index: -1;
-    opacity: 0.8;
+    opacity: 0.5;
+    filter: brightness(0.6) blur(4px);
     pointer-events: none;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 60%, transparent 100%);
 }
 
 .btn-indicator {
@@ -1283,10 +1289,11 @@ body::-webkit-scrollbar {
     height: 90%;
     object-fit: cover;
     z-index: -1;
-    opacity: 0.8;
+    opacity: 0.5;
+    filter: brightness(0.6) blur(4px);
     pointer-events: none;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 60%, transparent 100%);
 }
 
 .sponsors-section-container {
@@ -1308,10 +1315,11 @@ body::-webkit-scrollbar {
     height: 50%;
     object-fit: cover;
     z-index: -1;
-    opacity: 0.8;
+    opacity: 0.5;
+    filter: brightness(0.6) blur(4px);
     pointer-events: none;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 80%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 60%, transparent 100%);
 }
 
 .masonry-section-container {
@@ -1333,10 +1341,11 @@ body::-webkit-scrollbar {
     height: 125%;
     object-fit: cover;
     z-index: -1;
-    opacity: 0.8;
+    opacity: 0.5;
+    filter: brightness(0.6) blur(4px);
     pointer-events: none;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 80%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 60%, transparent 100%);
 }
 
 /* ===== Scroll Reveal Animation ===== */

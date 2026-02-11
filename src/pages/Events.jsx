@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import './Events.css';
 import mainBg from '../assets/main-bg.png';
 import { fetchEvents } from '../services/api';
@@ -14,13 +14,17 @@ const CATEGORIES = [
 
 export default function Events() {
     console.log('Events Component Rendering...'); // DEBUG LOG
+    const [searchParams] = useSearchParams();
+    const initialCategory = searchParams.get('category');
+    const validInitialCategory = CATEGORIES.includes(initialCategory) ? initialCategory : 'All Categories';
+
     const [currentPage, setCurrentPage] = useState(1);
     const ITEMS_PER_PAGE = 6;
 
     // Restoring missing state
     const [searchQuery, setSearchQuery] = useState('');
     const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState('All Categories');
+    const [selectedCategory, setSelectedCategory] = useState(validInitialCategory);
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

@@ -1,8 +1,17 @@
 import { useRef, memo } from "react";
+import { useNavigate } from "react-router-dom";
 
-export const BentoCard = memo(({ src, title, description }) => {
+export const BentoCard = memo(({ src, title, description, category }) => {
     const hoverButtonRef = useRef(null);
     const overlayRef = useRef(null);
+    const navigate = useNavigate();
+
+    const handleCardClick = () => {
+        if (category) {
+            const params = category === 'All Categories' ? '' : `?category=${encodeURIComponent(category)}`;
+            navigate(`/events${params}`);
+        }
+    };
 
     const handleMouseMove = (event) => {
         if (!hoverButtonRef.current || !overlayRef.current) return;
@@ -22,7 +31,7 @@ export const BentoCard = memo(({ src, title, description }) => {
     };
 
     return (
-        <div className="relative size-full">
+        <div className="relative size-full" onClick={handleCardClick} style={{ cursor: category ? 'pointer' : 'default' }}>
             <img
                 src={src}
                 alt="card-bg"

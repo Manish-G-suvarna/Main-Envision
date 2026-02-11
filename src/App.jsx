@@ -9,7 +9,7 @@ import ScrollIndicator from './components/ScrollIndicator'
 import ScrollReveal from './components/ScrollReveal'
 import './App.css'
 import heroTitleImg from './assets/hero-title.png'
-import landscapeVideo from './assets/bg-video/landscape.mp4'
+import landscapeVideo from './assets/bg-video/bg_video.mp4'
 import mainBg from './assets/main-bg.png'
 import extraImg01 from './assets/all-bg/extra-img-01.png'
 import timmerBanner from './assets/timmer-banner.png'
@@ -123,7 +123,7 @@ export default function App() {
               <img src={timmerBanner} alt="28th January 2026" className="timmer-banner" />
             </ScrollReveal>
             <ScrollReveal delay={150}>
-              <CountdownTimer targetDate="2026-03-28T00:00:00" />
+              <CountdownTimer targetDate="2026-04-16T00:00:00" />
             </ScrollReveal>
           </div>
 
@@ -148,7 +148,7 @@ export default function App() {
 
             {/* Date & Event Info Box */}
             <ScrollReveal delay={100} className="hero-info-box">
-              <div className="hero-info-month">FABRUARY</div>
+              <div className="hero-info-month">APRIL</div>
               <div className="hero-info-day">DAY 1</div>
               <div className="hero-info-divider"></div>
               <div className="hero-info-category">Events</div>
@@ -194,6 +194,7 @@ export default function App() {
                   src={allEventsBg}
                   title="ALL EVENTS"
                   description="Explore every challenge and celebration."
+                  category="All Categories"
                 />
               </BentoTilt>
 
@@ -205,6 +206,7 @@ export default function App() {
                     src={mainBg}
                     title="MEGA EVENTS"
                     description="The biggest showdowns."
+                    category="All Categories"
                   />
                 </BentoTilt>
 
@@ -215,6 +217,7 @@ export default function App() {
                       src={mainBg}
                       title="TECHNICAL"
                       description="Innovate, build, and conquer."
+                      category="Technical"
                     />
                   </BentoTilt>
 
@@ -223,6 +226,7 @@ export default function App() {
                       src={nonTechBg}
                       title="NON TECHNICAL"
                       description="Creativity beyond code."
+                      category="Non-Technical"
                     />
                   </BentoTilt>
                 </div>
