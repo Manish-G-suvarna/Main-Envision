@@ -22,6 +22,7 @@ import allEventsBg from './assets/events/all-events.png'
 import nonTechBg from './assets/events/non-tech.png'
 import Masonry from './components/Masonry';
 import DomeGallery from './components/DomeGallery';
+import Preloader from './components/Preloader';
 
 export default function App() {
   const [videoError, setVideoError] = useState(false)
@@ -32,6 +33,7 @@ export default function App() {
       className="app"
     // onContextMenu={(e) => e.preventDefault()} // Disable right-click
     >
+      <Preloader />
       {showGallery && (
         <div style={{ position: 'fixed', inset: 0, zIndex: 9999, background: '#000' }}>
           <button
