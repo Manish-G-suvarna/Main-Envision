@@ -2,10 +2,12 @@
     display: flex;
     justify-content: center;
     gap: 1.5rem;
-    margin-top: -6rem;
+    margin-top: 0;
+    padding-top: 1rem;
     flex-wrap: wrap;
     position: relative;
     z-index: 10;
+    contain: layout style paint;
 }
 
 .time-box-wrapper {

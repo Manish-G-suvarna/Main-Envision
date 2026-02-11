@@ -1,6 +1,7 @@
 import express from "express";
 import db from "../db.js";
 import crypto from "crypto";
+import { authenticateToken } from "./auth.js";
 
 const router = express.Router();
 
@@ -11,8 +12,8 @@ function generateOrderId() {
   return `ORD-${timestamp}-${randomStr}`.toUpperCase();
 }
 
-// Create new order
-router.post("/", async (req, res) => {
+// Create new order (JWT Authentication Required)
+router.post("/", authenticateToken, async (req, res) => {
   const { name, email, phone, college, teamName, teamSize, cartItems } = req.body;
 
   // Validate required fields
@@ -122,22 +123,44 @@ router.post("/", async (req, res) => {
             });
           }
 
-          // Success: Return order details
-          res.status(201).json({
-            success: true,
-            message: "Order created successfully",
-            order: {
-              orderId,
-              name,
-              email,
-              totalAmount,
-              status: "PENDING",
-              events: events.map(e => ({
-                id: e.id,
-                name: e.event_name,
-                fee: e.fee
-              }))
+          // Now create event registrations (pending status until payment confirmed)
+          const userId = req.user.id; // From JWT token
+          const registrationSql = `
+            INSERT INTO event_registrations (user_id, event_id, order_id, status)
+            VALUES ?
+          `;
+
+          const registrationValues = events.map(event => [
+            userId,
+            event.id,
+            orderId,
+            'PENDING'
+          ]);
+
+          db.query(registrationSql, [registrationValues], (err) => {
+            if (err) {
+              console.error("Error creating event registrations:", err);
+              // Note: We don't rollback here - registrations are created after order
+              // They'll be updated to CONFIRMED when payment is verified
             }
+
+            // Success: Return order details
+            res.status(201).json({
+              success: true,
+              message: "Order created successfully",
+              order: {
+                orderId,
+                name,
+                email,
+                totalAmount,
+                status: "PENDING",
+                events: events.map(e => ({
+                  id: e.id,
+                  name: e.event_name,
+                  fee: e.fee
+                }))
+              }
+            });
           });
         });
       });

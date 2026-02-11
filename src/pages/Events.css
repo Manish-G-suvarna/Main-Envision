@@ -374,6 +374,67 @@
     transform: translateY(-2px);
 }
 
+/* ===== FLOATING CART BUTTON ===== */
+.cart-btn-floating {
+    position: relative;
+    background: linear-gradient(135deg, rgba(255, 157, 0, 0.2), rgba(255, 157, 0, 0.1));
+    border: 1.5px solid rgba(255, 157, 0, 0.5);
+    padding: 0.7rem 1.2rem;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #ff9d00;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(255, 157, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+
+.cart-btn-floating:hover {
+    background: linear-gradient(135deg, rgba(255, 157, 0, 0.3), rgba(255, 157, 0, 0.2));
+    border-color: rgba(255, 157, 0, 0.8);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 157, 0, 0.3);
+    color: #ffc420;
+}
+
+.cart-btn-floating:active {
+    transform: translateY(-1px);
+}
+
+.cart-icon-nav {
+    width: 20px;
+    height: 20px;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: linear-gradient(135deg, #ff6b6b, #ff5252);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 0.25rem 0.5rem;
+    border-radius: 50%;
+    min-width: 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .events-title {
@@ -410,6 +471,23 @@
 
     .day-tab {
         flex-shrink: 0;
+    }
+
+    .cart-btn-floating {
+        padding: 0.6rem 0.9rem;
+        font-size: 0.75rem;
+        gap: 0.4rem;
+    }
+
+    .cart-icon-nav {
+        width: 18px;
+        height: 18px;
+    }
+
+    .cart-badge {
+        font-size: 0.6rem;
+        padding: 0.2rem 0.35rem;
+        min-width: 18px;
     }
 
     .events-bento-grid {

@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Events.css';
 import mainBg from '../assets/main-bg.png';
-import { fetchEvents } from '../services/api';
+import { fetchEvents, getCartCount, isAuthenticated } from '../services/api';
 import { EventCard } from '../components/EventCard';
 
 export default function Events() {
+    const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
     const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('All Categories');
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [cartCount, setCartCount] = useState(0);
 
     // Category mapping for filtering
     const categories = [
@@ -22,7 +24,26 @@ export default function Events() {
 
     useEffect(() => {
         loadEvents();
+        updateCartCount();
+
+        // Listen for cart updates
+        const handleCartUpdate = (event) => {
+            setCartCount(event.detail.length);
+        };
+
+        window.addEventListener('cartUpdated', handleCartUpdate);
+        return () => window.removeEventListener('cartUpdated', handleCartUpdate);
     }, []);
+
+    const updateCartCount = () => {
+        setCartCount(getCartCount());
+    };
+
+    const handleCartClick = () => {
+        if (cartCount > 0) {
+            navigate('/cart');
+        }
+    };
 
     const loadEvents = async () => {
         try {
@@ -68,6 +89,18 @@ export default function Events() {
                     Go to Home
                 </Link>
                 <div className="nav-right">
+                    {cartCount > 0 && (
+                        <button
+                            onClick={handleCartClick}
+                            className="cart-btn-floating"
+                            title={`${cartCount} item${cartCount !== 1 ? 's' : ''} in cart`}
+                        >
+                            <svg viewBox="0 0 24 24" className="cart-icon-nav">
+                                <path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                            </svg>
+                            <span className="cart-badge">{cartCount}</span>
+                        </button>
+                    )}
                     <Link to="/profile" className="nav-btn dashboard-btn">
                         Dashboard
                         <svg viewBox="0 0 24 24" className="icon arrow-right"><path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg>
