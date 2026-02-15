@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, Suspense, lazy, useEffect, useRef } from 'react'
 import Navbar from './components/Navbar'
 import LeafCanvas from './components/LeafCanvas'
 import CountdownTimer from './components/CountdownTimer'
@@ -9,7 +9,7 @@ import ScrollIndicator from './components/ScrollIndicator'
 import ScrollReveal from './components/ScrollReveal'
 import './App.css'
 import heroTitleImg from './assets/hero-title.png'
-import landscapeVideo from './assets/bg-video/bg_video.mp4'
+import landscapeVideo from './assets/bg-video/optimized_bg.mp4'
 import mainBg from './assets/main-bg.png'
 import extraImg01 from './assets/all-bg/extra-img-01.png'
 import timmerBanner from './assets/timmer-banner.png'
@@ -21,12 +21,38 @@ import extraImg05 from './assets/all-bg/extra-img-05.png'
 import allEventsBg from './assets/events/all-events.png'
 import nonTechBg from './assets/events/non-tech.png'
 import Masonry from './components/Masonry';
-import DomeGallery from './components/DomeGallery';
+// Lazy load DomeGallery
+const DomeGallery = lazy(() => import('./components/DomeGallery'));
 import Preloader from './components/Preloader';
 
 export default function App() {
   const [videoError, setVideoError] = useState(false)
   const [showGallery, setShowGallery] = useState(false)
+  const videoRef = useRef(null)
+
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (!videoElement) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            videoElement.play().catch(e => console.log("Auto-play prevented (expected on some browsers):", e));
+          } else {
+            videoElement.pause();
+          }
+        });
+      },
+      { threshold: 0.1 } // Play when 10% visible
+    );
+
+    observer.observe(videoElement);
+
+    return () => {
+      if (videoElement) observer.unobserve(videoElement);
+    };
+  }, []);
 
   return (
     <div
@@ -55,14 +81,16 @@ export default function App() {
           >
             CLOSE GALLERY
           </button>
-          <DomeGallery
-            fit={0.8}
-            minRadius={600}
-            maxVerticalRotationDeg={0}
-            segments={34}
-            dragDampening={2}
-            grayscale
-          />
+          <Suspense fallback={<div>Loading Gallery...</div>}>
+            <DomeGallery
+              fit={0.8}
+              minRadius={600}
+              maxVerticalRotationDeg={0}
+              segments={34}
+              dragDampening={2}
+              grayscale
+            />
+          </Suspense>
         </div>
       )}
 
@@ -72,10 +100,12 @@ export default function App() {
         <div className="bg-video-section bg-video">
           {!videoError ? (
             <video
+              ref={videoRef}
               autoPlay
               loop
               muted
               playsInline
+              poster={mainBg}
               className="background-video"
               onError={(e) => {
                 console.error('Video failed to load:', e)
@@ -113,16 +143,17 @@ export default function App() {
       {/* Main Content */}
       <main className="main-content">
         <section id="home" className="section hero-section">
-          <img src={heroTitleImg} alt="ENVISION" className="hero-title-img" />
+          <img src={heroTitleImg} alt="ENVISION" className="hero-title-img" width="800" height="300" />
 
           <div className="timer-bg-container">
             <img
               src={extraImg01}
               alt=""
               className="timer-bg-image"
+              fetchpriority="high"
             />
             <ScrollReveal>
-              <img src={timmerBanner} alt="28th January 2026" className="timmer-banner" />
+              <img src={timmerBanner} alt="28th January 2026" className="timmer-banner" width="600" height="150" />
             </ScrollReveal>
             <ScrollReveal delay={150}>
               <CountdownTimer targetDate="2026-04-16T00:00:00" />

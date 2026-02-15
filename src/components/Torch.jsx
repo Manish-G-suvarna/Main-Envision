@@ -100,6 +100,8 @@ export default function Torch({ className, style }) {
                 src={imageSrc}
                 alt="Torch"
                 className="torch-body"
+                width="50"
+                height="150"
             />
         </div>
     )

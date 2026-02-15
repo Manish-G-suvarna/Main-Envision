@@ -127,7 +127,7 @@ export default function Navbar() {
         <nav ref={navContainerRef} className="navbar">
             <div className="navbar-banner">
                 {/* ... (existing logo and torch) */}
-                <img src={logoImg} alt="Envision" className="navbar-logo" />
+                <img src={logoImg} alt="Envision" className="navbar-logo" width="150" height="50" />
                 <Torch className="torch-left" />
                 <ul className="navbar-links">
                     {navLinks.map((link) => (

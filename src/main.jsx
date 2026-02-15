@@ -18,8 +18,8 @@ const PageLoader = () => (
   </div>
 )
 
-// Import Admin component (eager load or lazy load)
-import Admin from './MyAdmin/admin.jsx'
+// Import Admin component (lazy load)
+const Admin = lazy(() => import('./MyAdmin/admin.jsx'))
 import { CartProvider } from './context/CartContext';
 
 createRoot(document.getElementById('root')).render(

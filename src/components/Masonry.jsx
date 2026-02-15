@@ -80,9 +80,9 @@ const Masonry = memo(({
         }
     }, [items]);
 
-    const getInitialPosition = (item) => {
+    const getInitialPosition = (item, containerRect) => {
         // Accessing containerRef.current in render/effect is fine, but check validity
-        const containerRect = containerRef.current?.getBoundingClientRect();
+        // const containerRect = containerRef.current?.getBoundingClientRect(); // REMOVED to avoid thrashing
         if (!containerRect) return { x: item.x, y: item.y };
 
         let direction = animateFrom;
@@ -148,7 +148,8 @@ const Masonry = memo(({
                 };
 
                 if (!hasMounted.current) {
-                    const initialPos = getInitialPosition(item);
+                    const containerRect = containerRef.current?.getBoundingClientRect();
+                    const initialPos = getInitialPosition(item, containerRect);
                     const initialState = {
                         opacity: 0,
                         x: initialPos.x,
