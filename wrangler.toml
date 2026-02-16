@@ -1,0 +1,21 @@
+name = "envision-api"
+main = "src/index.ts"
+compatibility_date = "2024-10-01"
+compatibility_flags = ["nodejs_compat"]
+
+# D1 Database Binding
+[[d1_databases]]
+binding = "DB"
+database_name = "envision_db"
+database_id = "3c276ad7-eea8-4bf4-82af-391c93dceb15"
+
+# Environment variables
+[env.production]
+vars = { ENVIRONMENT = "production" }
+
+[env.development]
+vars = { ENVIRONMENT = "development" }
+
+# Triggers (optional - for scheduled tasks)
+[triggers]
+crons = []
