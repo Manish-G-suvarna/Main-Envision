@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
-import torchImg from '../assets/navbar/torch.png'
-import torchFlame from '../assets/navbar/torch.png'
+import torchImg from '../../assets/navbar/torch.png'
+import torchFlame from '../../assets/navbar/torch.png'
 
 export default function Torch({ className, style }) {
     const canvasRef = useRef(null)

@@ -1,6 +1,6 @@
 import { useCart } from '../context/CartContext';
 import { Link, useNavigate } from 'react-router-dom';
-import mainBg from '../assets/main-bg.png';
+import mainBg from '../assets/images/main-bg.png';
 import './Events.css'; // Reuse events styling for consistency
 
 export default function Cart() {
@@ -53,7 +53,7 @@ export default function Cart() {
                                 }}>
                                     <div style={{ flex: 1, minWidth: '200px' }}>
                                         <h3 style={{ color: '#fff', fontSize: '1.4rem', margin: '0 0 0.5rem 0' }}>{event.name}</h3>
-                                        <p style={{ color: '#aaa', margin: 0, fontSize: '1rem' }}>{event.department}</p>
+                                        <p style={{ color: '#aaa', margin: 0, fontSize: '1rem' }}>{event.department?.department_name || event.department}</p>
                                     </div>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
                                         <span style={{ color: '#ff9d00', fontWeight: 'bold', fontSize: '1.2rem' }}>₹{event.fee}</span>

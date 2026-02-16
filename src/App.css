@@ -1,13 +1,13 @@
 @font-face {
     font-family: 'Lucentia';
-    src: url('./assets/lucentia-font/LucentiaDemoRegular-woDw9.ttf') format('truetype');
+    src: url('./assets/fonts/lucentia-font/LucentiaDemoRegular-woDw9.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Quera';
-    src: url('./assets/quera-font/QuerademoRegular-Zp7ZB.otf') format('opentype');
+    src: url('./assets/fonts/quera-font/QuerademoRegular-Zp7ZB.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }

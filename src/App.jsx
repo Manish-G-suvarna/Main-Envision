@@ -1,29 +1,31 @@
 import { useState, Suspense, lazy, useEffect, useRef } from 'react'
-import Navbar from './components/Navbar'
-import LeafCanvas from './components/LeafCanvas'
-import CountdownTimer from './components/CountdownTimer'
-import { BentoTilt } from './components/BentoTilt'
-import { BentoCard } from './components/BentoCard'
-import Footer from './components/Footer'
-import ScrollIndicator from './components/ScrollIndicator'
-import ScrollReveal from './components/ScrollReveal'
+
+import Navbar from './components/layout/Navbar'
+import LeafCanvas from './components/visuals/LeafCanvas'
+import CountdownTimer from './components/ui/CountdownTimer'
+import { BentoTilt } from './components/ui/BentoTilt'
+import { BentoCard } from './components/ui/BentoCard'
+import Footer from './components/layout/Footer'
+import ScrollIndicator from './components/layout/ScrollIndicator'
+import ScrollReveal from './components/visuals/ScrollReveal'
 import './App.css'
-import heroTitleImg from './assets/hero-title.png'
-import landscapeVideo from './assets/bg-video/optimized_bg.mp4'
-import mainBg from './assets/main-bg.png'
-import extraImg01 from './assets/all-bg/extra-img-01.png'
-import timmerBanner from './assets/timmer-banner.png'
-import extraImg02 from './assets/all-bg/extra-img-02.png'
-import extraImg03 from './assets/all-bg/extra-img-03.png'
-import extraImg04 from './assets/all-bg/extra-img-04.png'
-import extraImg05 from './assets/all-bg/extra-img-05.png'
+import heroTitleImg from './assets/images/hero-title.png'
+import landscapeVideo from './assets/videos/bg-video/optimized_bg.mp4'
+import mainBg from './assets/images/main-bg.png'
+import extraImg01 from './assets/backgrounds/all-bg/extra-img-01.png'
+import timmerBanner from './assets/images/timmer-banner.png'
+import extraImg02 from './assets/backgrounds/all-bg/extra-img-02.png'
+import extraImg03 from './assets/backgrounds/all-bg/extra-img-03.png'
+import extraImg04 from './assets/backgrounds/all-bg/extra-img-04.png'
+import extraImg05 from './assets/backgrounds/all-bg/extra-img-05.png'
 
 import allEventsBg from './assets/events/all-events.png'
 import nonTechBg from './assets/events/non-tech.png'
-import Masonry from './components/Masonry';
+import Masonry from './components/ui/Masonry';
 // Lazy load DomeGallery
-const DomeGallery = lazy(() => import('./components/DomeGallery'));
-import Preloader from './components/Preloader';
+const DomeGallery = lazy(() => import('./components/visuals/DomeGallery'));
+
+import Preloader from './components/ui/Preloader';
 
 export default function App() {
   const [videoError, setVideoError] = useState(false)
@@ -55,11 +57,9 @@ export default function App() {
   }, []);
 
   return (
-    <div
-      className="app"
-    // onContextMenu={(e) => e.preventDefault()} // Disable right-click
-    >
+    <div className="app">
       <Preloader />
+
       {showGallery && (
         <div style={{ position: 'fixed', inset: 0, zIndex: 9999, background: '#000' }}>
           <button

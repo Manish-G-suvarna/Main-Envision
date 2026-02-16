@@ -1,0 +1,298 @@
+/* Light Neumorphism — Warm Palette */
+:root {
+    --neu-bg: #2a1a12;
+    --neu-text-main: #f0dcc8;
+    --neu-text-light: #a08a78;
+    --neu-shadow-light: #3a2a1e;
+    --neu-shadow-dark: #1a0e08;
+    --neu-gold: #F6CE71;
+    --neu-burnt: #CC561E;
+    --neu-orange: #FF6500;
+    --neu-red: #C40C0C;
+}
+
+.login-root {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: var(--neu-bg);
+}
+
+.login-overlay {
+    display: none;
+}
+
+/* Back Button */
+.back-home-btn {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    background: var(--neu-bg);
+    color: var(--neu-text-light);
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease-in-out;
+    box-shadow:
+        -5px -5px 20px var(--neu-shadow-light),
+        5px 5px 20px var(--neu-shadow-dark);
+}
+
+.back-home-btn:hover {
+    color: var(--neu-orange);
+    box-shadow:
+        -2px -2px 5px var(--neu-shadow-light),
+        2px 2px 5px var(--neu-shadow-dark);
+}
+
+.back-home-btn:active {
+    box-shadow:
+        inset 1px 1px 2px var(--neu-shadow-dark),
+        inset -1px -1px 2px var(--neu-shadow-light);
+}
+
+.icon {
+    width: 18px;
+    height: 18px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* Main Card */
+.glass-card {
+    border-radius: 40px;
+    padding: 3rem;
+    background: var(--neu-bg);
+    box-shadow:
+        -10px -10px 30px var(--neu-shadow-light),
+        10px 10px 30px var(--neu-shadow-dark);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.login-header h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--neu-burnt), var(--neu-orange));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.login-header p {
+    color: var(--neu-text-light);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.form-group label {
+    margin-left: 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--neu-text-light);
+}
+
+/* Inputs */
+.form-group input {
+    border: 0;
+    outline: 0;
+    font-size: 1rem;
+    border-radius: 30px;
+    padding: 1rem 1.5rem;
+    background: var(--neu-bg);
+    color: var(--neu-text-main);
+    font-family: inherit;
+    box-shadow:
+        inset 2px 2px 5px var(--neu-shadow-dark),
+        inset -5px -5px 10px var(--neu-shadow-light);
+    transition: all 0.2s ease-in-out;
+}
+
+.form-group input:focus {
+    box-shadow:
+        inset 1px 1px 2px var(--neu-shadow-dark),
+        inset -1px -1px 2px var(--neu-shadow-light);
+    color: var(--neu-burnt);
+}
+
+.form-group input::placeholder {
+    color: var(--neu-text-light);
+    opacity: 0.7;
+}
+
+.forgot-password {
+    text-align: right;
+    margin-right: 1rem;
+}
+
+.forgot-password a {
+    color: var(--neu-text-light);
+    font-size: 0.85rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.forgot-password a:hover {
+    color: var(--neu-red);
+}
+
+/* Primary Button — gradient accent */
+.submit-btn {
+    border: 0;
+    outline: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 30px;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--neu-orange), var(--neu-red));
+    color: #fff;
+    margin-top: 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.2s ease-in-out;
+    box-shadow:
+        -5px -5px 20px var(--neu-shadow-light),
+        5px 5px 20px var(--neu-shadow-dark);
+}
+
+.submit-btn:hover {
+    box-shadow:
+        -2px -2px 5px var(--neu-shadow-light),
+        2px 2px 5px var(--neu-shadow-dark),
+        0 4px 15px rgba(255, 101, 0, 0.4);
+    transform: translateY(-1px);
+}
+
+.submit-btn:active {
+    box-shadow:
+        inset 1px 1px 2px rgba(0, 0, 0, 0.3),
+        inset -1px -1px 2px rgba(255, 255, 255, 0.1);
+    transform: translateY(0);
+}
+
+/* Divider */
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    color: var(--neu-text-light);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--neu-shadow-dark);
+    box-shadow: 0 1px 0 var(--neu-shadow-light);
+}
+
+/* Google Button */
+.google-btn {
+    border: 0;
+    outline: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem;
+    border-radius: 30px;
+    background: var(--neu-bg);
+    color: var(--neu-gold);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow:
+        -5px -5px 20px var(--neu-shadow-light),
+        5px 5px 20px var(--neu-shadow-dark);
+}
+
+.google-btn:hover {
+    box-shadow:
+        -2px -2px 5px var(--neu-shadow-light),
+        2px 2px 5px var(--neu-shadow-dark);
+}
+
+.google-btn:active {
+    box-shadow:
+        inset 1px 1px 2px var(--neu-shadow-dark),
+        inset -1px -1px 2px var(--neu-shadow-light);
+}
+
+.google-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Toggle Link */
+.toggle-auth {
+    text-align: center;
+    margin-top: 2.5rem;
+    color: var(--neu-text-light);
+    font-size: 0.95rem;
+}
+
+.toggle-btn {
+    background: transparent;
+    border: none;
+    color: var(--neu-burnt);
+    font-weight: 700;
+    padding: 0 0 0 0.3rem;
+    font-size: inherit;
+    cursor: pointer;
+    transition: color 0.2s;
+    text-shadow: 1px 1px 1px var(--neu-shadow-light);
+}
+
+.toggle-btn:hover {
+    color: var(--neu-orange);
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .glass-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .login-header h2 {
+        font-size: 1.8rem;
+    }
+}

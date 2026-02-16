@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Profile.css';
-import logo from '../assets/logo.png';
-import mainBg from '../assets/main-bg.png';
-import CountdownTimer from '../components/CountdownTimer';
+import logo from '../assets/images/logo.png';
+import mainBg from '../assets/images/main-bg.png';
+import CountdownTimer from '../components/ui/CountdownTimer';
 import { useCart } from '../context/CartContext';
 
 export default function Profile() {
@@ -274,7 +274,7 @@ export default function Profile() {
                             {cart.map((event) => (
                                 <div key={event.id} className="profile-event-card" style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '12px', padding: '1.5rem', border: '1px solid rgba(255,255,255,0.1)', position: 'relative' }}>
                                     <h3 style={{ color: '#fff', fontSize: '1.2rem', marginBottom: '0.5rem' }}>{event.name}</h3>
-                                    <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.5rem' }}>{event.department}</p>
+                                    <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.5rem' }}>{event.department?.department_name || event.department}</p>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <span style={{ color: '#ff9d00', fontWeight: 'bold' }}>₹{event.fee}</span>
                                         <button

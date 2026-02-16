@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import PageTransition from './PageTransition'
-import PerformanceOptimizer from './PerformanceOptimizer'
+import PerformanceOptimizer from '../utils/PerformanceOptimizer'
 
 export default function Layout() {
     const { pathname } = useLocation()

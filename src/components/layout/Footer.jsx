@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import './Footer.css';
-import footerBg from '../assets/footer-img.png';
+import footerBg from '../../assets/images/footer-img.png';
 
 const Footer = () => {
     return (

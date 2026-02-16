@@ -2,8 +2,8 @@ import { StrictMode, Suspense, lazy } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
-import Layout from './components/Layout.jsx'
-import ErrorBoundary from './components/ErrorBoundary.jsx'
+import Layout from './components/layout/Layout.jsx'
+import ErrorBoundary from './components/utils/ErrorBoundary.jsx'
 
 
 // Lazy load pages for better initial load performance
@@ -20,6 +20,7 @@ const PageLoader = () => (
 
 // Import Admin component (lazy load)
 const Admin = lazy(() => import('./MyAdmin/admin.jsx'))
+const Login = lazy(() => import('./components/Login/Login.jsx'))
 import { CartProvider } from './context/CartContext';
 
 createRoot(document.getElementById('root')).render(
@@ -29,6 +30,7 @@ createRoot(document.getElementById('root')).render(
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/admin" element={<Admin />} />
+            <Route path="/login" element={<Login />} />
             <Route element={<Layout />}>
               <Route path="/" element={<App />} />
               <Route path="/events" element={

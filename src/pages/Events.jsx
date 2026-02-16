@@ -1,9 +1,9 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import './Events.css';
-import mainBg from '../assets/main-bg.png';
+import mainBg from '../assets/images/main-bg.png';
 import { fetchEvents } from '../services/api';
-import { EventCard } from '../components/EventCard';
+import { EventCard } from '../components/ui/EventCard';
 
 // Category mapping for filtering - Moved outside to prevent recreation
 const CATEGORIES = [

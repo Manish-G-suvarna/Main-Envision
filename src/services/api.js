@@ -1,6 +1,6 @@
 // API Service for Envision Backend
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'http://localhost:3000/api/v1';
 
 /**
  * Fetch all events from the backend
@@ -16,7 +16,12 @@ export async function fetchEvents() {
         const text = await response.text();
         try {
             const events = JSON.parse(text);
-            return events;
+            return events.map(event => ({
+                ...event,
+                name: event.event_name,
+                // Ensure other fields match if needed, but name is the critical one missing
+                // Also keeping event_name just in case
+            }));
         } catch (e) {
             console.error('Failed to parse events JSON:', text);
             throw new Error('Invalid JSON response from server');

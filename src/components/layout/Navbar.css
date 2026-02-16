@@ -63,7 +63,7 @@
     width: 95%;
     max-width: 1000px;
     min-height: 380px;
-    background-image: url('../assets/navbar/navbar-main.png');
+    background-image: url('../../assets/navbar/navbar-main.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
@@ -217,7 +217,7 @@
         /* Separated/Reduced for mobile view (fits 98px icons) */
         /* Increased to allow image to show better */
         padding: 5px 0;
-        background-image: url('../assets/navbar/navbar-main.png');
+        background-image: url('../../assets/navbar/navbar-main.png');
         background-size: 100% 280%;
         background-repeat: no-repeat;
         background-position: center;

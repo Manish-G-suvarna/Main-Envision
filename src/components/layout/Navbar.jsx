@@ -3,13 +3,13 @@ import { useNavigate, useLocation } from 'react-router-dom'
 
 import gsap from 'gsap'
 import './Navbar.css'
-import Torch from './Torch'
+import Torch from '../visuals/Torch'
 
 // Icons no longer used as components if all are images now
-import homeIconImg from '../assets/nav-icon/home-icon.png'
-import profileIconImg from '../assets/nav-icon/profile-icon.png'
-import eventIconImg from '../assets/nav-icon/event-icon.png'
-import logoImg from '../assets/ENVISION_logo.png'
+import homeIconImg from '../../assets/nav-icon/home-icon.png'
+import profileIconImg from '../../assets/nav-icon/profile-icon.png'
+import eventIconImg from '../../assets/nav-icon/event-icon.png'
+import logoImg from '../../assets/images/ENVISION_logo.png'
 
 export default function Navbar() {
     const navigate = useNavigate()
@@ -152,7 +152,7 @@ export default function Navbar() {
 
                 </ul>
                 <Torch className="torch-right" />
-                <button className="register-login-btn navbar-btn" onClick={() => navigate('/admin')}>
+                <button className="register-login-btn navbar-btn" onClick={() => navigate('/login')}>
                     REGISTER / LOGIN
                 </button>
             </div>

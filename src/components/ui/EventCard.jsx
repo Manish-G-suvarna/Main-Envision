@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import './EventCard.css';
 
-import { useCart } from '../context/CartContext';
+import { useCart } from '../../context/CartContext';
 
 export const EventCard = ({ event }) => {
     // Guard clause for safety
@@ -60,7 +60,7 @@ export const EventCard = ({ event }) => {
             </div>
 
             {/* Department */}
-            <div className="event-department">📍 {event.department}</div>
+            <div className="event-department">📍 {event.department?.department_name || event.department}</div>
 
             {/* Description */}
             <p className="event-description">
